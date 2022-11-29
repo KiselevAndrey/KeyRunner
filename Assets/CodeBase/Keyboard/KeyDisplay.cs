@@ -7,22 +7,36 @@ namespace CodeBase.Keyboard
     public class KeyDisplay : MonoBehaviour
     {
         [field: SerializeField] public KeyCode Key { get; private set; }
-        [SerializeField] private TMP_Text _nameText;
         [SerializeField] private Image _background;
+        [SerializeField] private TMP_Text _singleLetter;
+        [SerializeField] private GameObject _dobleLetterBase;
+        [SerializeField] private TMP_Text _firstLetter;
+        [SerializeField] private TMP_Text _secondLetter;
 
-        public void Init(string leter)
+        private LetterInfo _info;
+
+        public void Init(LetterInfo info)
         {
-            _nameText.text = leter;
+            _info = info;
+
+            if (_info.IsDouble)
+            {
+                _singleLetter.gameObject.SetActive(false);
+                _dobleLetterBase.SetActive(true);
+                _firstLetter.text = _info.Letter;
+                _secondLetter.text = _info.ShiftLetter;
+            }
+            else
+            {
+                _singleLetter.gameObject.SetActive(true);
+                _dobleLetterBase.SetActive(false);
+                _singleLetter.text = _info.Letter;
+            }
         }
 
         public void ChangeColor(Color color)
         {
             _background.color = color;
-        }
-
-        private void Awake()
-        {
-            _nameText.text = Key.ToString();
         }
     }
 }

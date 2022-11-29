@@ -8,13 +8,28 @@ namespace CodeBase.Keyboard
 {
     public class KeyboardManager : MonoBehaviour
     {
+        [SerializeField] private LanguageKeyMapSO _keyMapSO;
+
         private KeyCode _pressedKey;
         private KeyDisplay _selectedDisplay;
         private List<KeyDisplay> _keys = new();
 
+        public void InitKeys(LanguageKeyMapSO keyMapSO)
+        {
+            foreach (var key in _keys)
+            {
+                key.Init(keyMapSO.GetInfo(key.Key));
+            }
+        }
+
         private void Awake()
         {
             _keys = GetComponentsInChildren<KeyDisplay>().ToList();
+        }
+
+        private void Start()
+        {
+            InitKeys(_keyMapSO);
         }
 
         private void Update()
@@ -22,10 +37,10 @@ namespace CodeBase.Keyboard
             if (Keys.KeyDown(ref _pressedKey))
                 print(_pressedKey);
 
-            //if (Keys.KeyPressed(ref _pressedKey))
-            //    SelectKeyDisplay();
-            //else
-            //    DeselectSelectedKeys();
+            if (Keys.KeyPressed(ref _pressedKey))
+                SelectKeyDisplay();
+            else
+                DeselectSelectedKeys();
         }
 
         private void SelectKeyDisplay()
