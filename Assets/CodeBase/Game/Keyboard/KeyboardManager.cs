@@ -1,10 +1,11 @@
+using CodeBase.Game.Settings;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 using Keys = CodeBase.Utility.KeyboardInputUtility;
 
-namespace CodeBase.Keyboard
+namespace CodeBase.Game.Keyboard
 {
     public class KeyboardManager : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace CodeBase.Keyboard
+namespace CodeBase.Game.Settings
 {
     [CreateAssetMenu(fileName = nameof(LanguageKeyMapSO), menuName = nameof(CodeBase) + "/" + nameof(LanguageKeyMapSO))]
     public class LanguageKeyMapSO : ScriptableObject

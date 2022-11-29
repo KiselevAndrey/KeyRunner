@@ -1,8 +1,9 @@
+using CodeBase.Game.Settings;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Keyboard
+namespace CodeBase.Game.Keyboard
 {
     public class KeyDisplay : MonoBehaviour
     {

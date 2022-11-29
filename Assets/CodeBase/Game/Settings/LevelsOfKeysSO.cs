@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CodeBase.Keyboard
+namespace CodeBase.Game.Settings
 {
     [CreateAssetMenu(fileName = nameof(LevelsOfKeysSO), menuName = nameof(CodeBase) + "/" + nameof(LevelsOfKeysSO))]
     public class LevelsOfKeysSO : ScriptableObject
