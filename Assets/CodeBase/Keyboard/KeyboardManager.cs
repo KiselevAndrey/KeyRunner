@@ -19,10 +19,13 @@ namespace CodeBase.Keyboard
 
         private void Update()
         {
-            if (Keys.KeyPressed(ref _pressedKey))
-                SelectKeyDisplay();
-            else
-                DeselectSelectedKeys();
+            if (Keys.KeyDown(ref _pressedKey))
+                print(_pressedKey);
+
+            //if (Keys.KeyPressed(ref _pressedKey))
+            //    SelectKeyDisplay();
+            //else
+            //    DeselectSelectedKeys();
         }
 
         private void SelectKeyDisplay()
