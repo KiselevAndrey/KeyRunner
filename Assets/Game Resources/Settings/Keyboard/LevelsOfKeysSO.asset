@@ -15,5 +15,10 @@ MonoBehaviour:
   <Levels>k__BackingField:
   - <FirstKeys>k__BackingField: 102
     <SecondKeys>k__BackingField: 106
+    <IsShifted>k__BackingField: 0
   - <FirstKeys>k__BackingField: 100
     <SecondKeys>k__BackingField: 107
+    <IsShifted>k__BackingField: 0
+  - <FirstKeys>k__BackingField: 115
+    <SecondKeys>k__BackingField: 108
+    <IsShifted>k__BackingField: 0
