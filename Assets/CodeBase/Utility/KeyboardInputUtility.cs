@@ -24,7 +24,6 @@ namespace CodeBase.Utility
 
             return false;
         }
-
         public static bool KeyPressed(ref KeyCode key)
         {
             if (Input.anyKey)
@@ -37,7 +36,6 @@ namespace CodeBase.Utility
 
             return false;
         }
-
         public static bool KeyUp(ref KeyCode key)
         {
             foreach (KeyCode keyCode in _keyCodes)
@@ -65,6 +63,23 @@ namespace CodeBase.Utility
 
             return downedKeys.Count > 0 
                 || pressedKeys.Count > 0 
+                || uppenedKeys.Count > 0;
+        }
+
+        public static bool KeysInfoDownUp(out List<KeyCode> downedKeys, out List<KeyCode> uppenedKeys)
+        {
+            downedKeys = new List<KeyCode>();
+            uppenedKeys = new List<KeyCode>();
+
+            foreach (KeyCode keyCode in _keyCodes)
+            {
+                if (Input.GetKeyDown(keyCode))
+                    downedKeys.Add(keyCode);
+                else if (Input.GetKeyUp(keyCode))
+                    uppenedKeys.Add(keyCode);
+            }
+
+            return downedKeys.Count > 0
                 || uppenedKeys.Count > 0;
         }
     }

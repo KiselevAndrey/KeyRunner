@@ -8,7 +8,7 @@ namespace CodeBase.UI.Keyboard
     public class KeyDisplay : MonoBehaviour
     {
         private readonly Color _firstColor = Color.black;
-        private readonly Color _secondColor = new(0.75f, 0.75f, 0.75f);
+        private readonly Color _secondColor = new(0.6f, 0.6f, 0.6f);
 
         [field: SerializeField] public KeyCode Key { get; private set; }
         [SerializeField] private Image _background;

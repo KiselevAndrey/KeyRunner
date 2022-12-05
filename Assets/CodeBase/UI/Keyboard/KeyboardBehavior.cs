@@ -22,6 +22,8 @@ namespace CodeBase.UI.Keyboard
         {
             foreach (var display in _displays)
                 display.Init(keyMapSO.GetInfo(display.Key));
+
+            AddShift(-_shiftPressed);
         }
 
         public void HighlightDisplay(KeyCode key)
@@ -39,26 +41,18 @@ namespace CodeBase.UI.Keyboard
 
         private void Update()
         {
-            if(Keys.KeysInfo(out List<KeyCode> downed, out List<KeyCode> pressed, out List<KeyCode> uppened))
+            if(Keys.KeysInfoDownUp(out List<KeyCode> downed, out List<KeyCode> uppened))
             {
                 UpdateKeysDown(downed);
                 UpdateKeysUp(uppened);
             }
-
-            //if (Keys.KeyDown(ref _pressedKey))
-            //    print(_pressedKey);
-
-            //if (Keys.KeyPressed(ref _pressedKey))
-            //    SelectKeyDisplay();
-            //else
-            //    DeselectSelectedKeys();
         }
 
         private void UpdateKeysDown(List<KeyCode> keys)
         {
             foreach (var key in keys)
             {
-                print(key);
+                //print($"Key Down: {key}");
                 var display = SelectKey(key, Color.red);
 
                 if (display == null)
@@ -114,19 +108,6 @@ namespace CodeBase.UI.Keyboard
                 foreach (var display in _displays)
                     display.SetShift(!shiftedNow);
         }
-
-        //private void SelectKeyDisplay()
-        //{
-        //    if (_selectedDisplay != null && _selectedDisplay.Key == _pressedKey)
-        //        return;
-
-        //    _selectedDisplay = FindDisplay(_pressedKey);
-
-        //    if (_selectedDisplay == null)
-        //        return;
-
-        //    _selectedDisplay.ChangeColor(Color.red);
-        //}
 
         private KeyDisplay FindDisplay(KeyCode key)
         {
