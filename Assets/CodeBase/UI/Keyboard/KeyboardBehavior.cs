@@ -58,8 +58,11 @@ namespace CodeBase.UI.Keyboard
                 if (display == null)
                     return;
 
-                if(IsShift(key))
-                    AddShift();
+                if (IsSupportiveKeys(key))
+                {
+                    if (IsShift(key))
+                        AddShift();
+                }
                 else
                     PressedKey?.Invoke(key, _shiftPressed > 0);
             }    
@@ -94,6 +97,10 @@ namespace CodeBase.UI.Keyboard
                 && display != _highlightedDisplay)
                 display.ResetColor();
         }
+
+        private bool IsSupportiveKeys(KeyCode key)
+            => IsShift(key) || key == KeyCode.Tab || key == KeyCode.CapsLock
+            || key == KeyCode.Return || key == KeyCode.Backspace;
 
         private bool IsShift(KeyCode key)
             => key == KeyCode.LeftShift || key == KeyCode.RightShift;

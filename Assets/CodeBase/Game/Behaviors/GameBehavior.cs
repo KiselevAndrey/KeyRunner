@@ -4,12 +4,13 @@ using CodeBase.UI.Keyboard;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CodeBase.Game
+namespace CodeBase.Game.Behaviors
 {
     public class GameBehavior : MonoBehaviour
     {
         [SerializeField] private KeyboardBehavior _keyboard;
         [SerializeField] private GameLettersBehavior _gameLetter;
+        [SerializeField] private LifeBehavior _life;
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
         [SerializeField] private LanguageKeyMapSO _languageKeyMapSO;
         [SerializeField, Min(0)] private int _selectedLevel;
@@ -23,6 +24,7 @@ namespace CodeBase.Game
         {
             ChangeKeyboardLayout();
             SelectLevel(_selectedLevel);
+            _life.StartNewGame();
         }
 
         private void OnEnable()
@@ -64,15 +66,20 @@ namespace CodeBase.Game
             if(_gameLetter.IsLastLetter(key, isShifted))
             {
                 _gameLetter.NextLetter();
-            }
 
-            if(_gameLetter.LettersLeft > 0)
-            {
-                _keyboard.HighlightDisplay(_gameLetter.LastKey);
+
+                if (_gameLetter.LettersLeft > 0)
+                {
+                    _keyboard.HighlightDisplay(_gameLetter.LastKey);
+                }
+                else
+                {
+                    SelectLevel(_selectedLevel);
+                }
             }
             else
             {
-                SelectLevel(_selectedLevel);
+                _life.HitMe(1);
             }
         }
     }
