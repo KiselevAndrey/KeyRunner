@@ -42,6 +42,11 @@ namespace CodeBase.Game.Letter
             _pool.DespawnLast();
         }
 
+        public void Hide()
+        {
+            _pool.DespawnAll();
+        }
+
         private void Awake()
         {
             _pool = GetComponent<LocalPool>();

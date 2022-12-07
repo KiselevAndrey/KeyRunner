@@ -3,6 +3,7 @@ using CodeBase.Settings;
 using CodeBase.UI.Keyboard;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CodeBase.Game.Behaviors
 {
@@ -15,16 +16,19 @@ namespace CodeBase.Game.Behaviors
         [SerializeField] private LanguageKeyMapSO _languageKeyMapSO;
         [SerializeField, Min(0)] private int _selectedLevel;
 
+        public event UnityAction EndGame;
+
         public void ChangeKeyboardLayout()
         {
             _keyboard.InitDisplays(_languageKeyMapSO);
         }
 
-        private void Start()
+        public void StartNewGame()
         {
             ChangeKeyboardLayout();
             SelectLevel(_selectedLevel);
             _life.StartNewGame();
+            _keyboard.enabled = true;
         }
 
         private void OnEnable()
@@ -67,7 +71,6 @@ namespace CodeBase.Game.Behaviors
             {
                 _gameLetter.NextLetter();
 
-
                 if (_gameLetter.LettersLeft > 0)
                 {
                     _keyboard.HighlightDisplay(_gameLetter.LastKey);
@@ -80,7 +83,18 @@ namespace CodeBase.Game.Behaviors
             else
             {
                 _life.HitMe(1);
+
+                if (_life.IsLive == false)
+                    GameEnded();
             }
+        }
+
+        private void GameEnded()
+        {
+            _keyboard.enabled = false;
+            _keyboard.DeselectAllDisplays();
+            _gameLetter.Hide();
+            EndGame?.Invoke();
         }
     }
 }

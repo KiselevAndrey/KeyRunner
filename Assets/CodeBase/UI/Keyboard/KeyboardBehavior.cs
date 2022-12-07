@@ -26,12 +26,18 @@ namespace CodeBase.UI.Keyboard
             AddShift(-_shiftPressed);
         }
 
-        public void HighlightDisplay(KeyCode key)
+        public void HighlightDisplay(KeyCode key, bool hideLastHiglightedDisplay = true)
         {
-            if (_highlightedDisplay != null)
+            if (_highlightedDisplay != null && hideLastHiglightedDisplay)
                 _highlightedDisplay.ResetColor();
 
             _highlightedDisplay = SelectKey(key, Color.yellow);
+        }
+
+        public void DeselectAllDisplays()
+        {
+            foreach (var dispay in _displays)
+                dispay.ResetColor();
         }
 
         private void Awake()
