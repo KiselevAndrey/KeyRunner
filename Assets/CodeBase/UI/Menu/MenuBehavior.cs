@@ -52,8 +52,7 @@ namespace CodeBase.UI.Menu
 
         private void OnClickSelectLVL()
         {
-            //_mediator.Show(MenuWindow.SelectLVL);
-            print("OnClickSelectLVL");
+            _mediator.Show(MenuWindow.SelectLVL);
         }
 
         private void OnClickOptions()

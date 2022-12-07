@@ -24,8 +24,8 @@ namespace CodeBase.Settings
         {
             level = ApprovedLevel(level);
             var infos = new List<LevelInfo>();
-            infos.Add(_spaceInfo);
             infos.Add(Levels[level]);
+            infos.Add(_spaceInfo);
             return infos;
         }
 

@@ -23,7 +23,7 @@ namespace CodeBase.UI.Keyboard
             foreach (var display in _displays)
                 display.Init(keyMapSO.GetInfo(display.Key));
 
-            AddShift(-_shiftPressed);
+            ResetShift();
         }
 
         public void HighlightDisplay(KeyCode key, bool hideLastHiglightedDisplay = true)
@@ -38,6 +38,20 @@ namespace CodeBase.UI.Keyboard
         {
             foreach (var dispay in _displays)
                 dispay.ResetColor();
+        }
+
+        public void ResetShift()
+            => AddShift(-_shiftPressed);
+
+        public void AddShift(int value = 1)
+        {
+            var shiftedNow = _shiftPressed > 0;
+
+            _shiftPressed += value;
+
+            if (shiftedNow != _shiftPressed > 0)
+                foreach (var display in _displays)
+                    display.SetShift(!shiftedNow);
         }
 
         private void Awake()
@@ -110,17 +124,6 @@ namespace CodeBase.UI.Keyboard
 
         private bool IsShift(KeyCode key)
             => key == KeyCode.LeftShift || key == KeyCode.RightShift;
-
-        private void AddShift(int value = 1)
-        {
-            var shiftedNow = _shiftPressed > 0;
-
-            _shiftPressed += value;
-
-            if (shiftedNow != _shiftPressed > 0)
-                foreach (var display in _displays)
-                    display.SetShift(!shiftedNow);
-        }
 
         private KeyDisplay FindDisplay(KeyCode key)
         {
