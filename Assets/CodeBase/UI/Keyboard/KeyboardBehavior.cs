@@ -26,9 +26,9 @@ namespace CodeBase.UI.Keyboard
             ResetShift();
         }
 
-        public void HighlightDisplay(KeyCode key, bool hideLastHiglightedDisplay = true)
+        public void HighlightDisplay(KeyCode key)
         {
-            if (_highlightedDisplay != null && hideLastHiglightedDisplay)
+            if (_highlightedDisplay != null)
                 _highlightedDisplay.ResetColor();
 
             _highlightedDisplay = SelectKey(key, Color.yellow);
@@ -53,6 +53,9 @@ namespace CodeBase.UI.Keyboard
                 foreach (var display in _displays)
                     display.SetShift(!shiftedNow);
         }
+
+        public void PaintKey(KeyCode key, Color color)
+            => SelectKey(key, color);
 
         private void Awake()
         {

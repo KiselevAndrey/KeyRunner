@@ -1,4 +1,5 @@
 using CodeBase.Settings;
+using CodeBase.Settings.Singleton;
 using CodeBase.UI.Keyboard;
 using CodeBase.Utility;
 using UnityEngine;
@@ -32,19 +33,24 @@ namespace CodeBase.UI.Menu
             _keyboard.DeselectAllDisplays();
             _keyboard.ResetShift();
 
-            if (_levelsOfKeysSO.GetNewKeys(level)[0].IsShifted)
-                _keyboard.AddShift();
-
             foreach (var info in _levelsOfKeysSO.GenerateKeys(level))
             {
-                _keyboard.HighlightDisplay(info.FirstKeys, false);
-                _keyboard.HighlightDisplay(info.SecondKeys, false);
+                _keyboard.PaintKey(info.FirstKeys, Color.yellow);
+                _keyboard.PaintKey(info.SecondKeys, Color.yellow);
             }
+
+            var newKeys = _levelsOfKeysSO.GetNewKeys(level)[0];
+            if (newKeys.IsShifted)
+                _keyboard.AddShift();
+
+            _keyboard.PaintKey(newKeys.FirstKeys, Color.red);
+            _keyboard.PaintKey(newKeys.SecondKeys, Color.red);
         }
 
         private void OnLevelSelect(int level)
         {
             level--;
+            PlayerInfoSO.SelectedLVL = level;
             _menuMediator.Show(MenuWindow.Buttons);
         }
     }

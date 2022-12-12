@@ -29,7 +29,7 @@ namespace CodeBase.Settings
             return infos;
         }
 
-        private int ApprovedLevel(int level) 
+        public int ApprovedLevel(int level) 
             => Mathf.Min(level, MaxLevel);
     }
 

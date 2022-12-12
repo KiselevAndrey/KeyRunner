@@ -1,3 +1,4 @@
+using CodeBase.Game.Character;
 using CodeBase.Game.Letter;
 using CodeBase.Settings;
 using CodeBase.UI.Keyboard;
@@ -11,6 +12,7 @@ namespace CodeBase.Game.Behaviors
     {
         [SerializeField] private KeyboardBehavior _keyboard;
         [SerializeField] private GameLettersBehavior _gameLetter;
+        [SerializeField] private CharacterBehavior _character;
         [SerializeField] private LifeBehavior _life;
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
         [SerializeField] private LanguageKeyMapSO _languageKeyMapSO;

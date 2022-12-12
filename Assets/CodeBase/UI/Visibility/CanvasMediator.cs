@@ -9,9 +9,9 @@ namespace CodeBase.UI.Visibility
         protected void ShowHide(CanvasGroupController controller, bool isShow)
         {
             if (isShow)
-                controller.Show();
+                controller.ShowSmooth();
             else
-                controller.Hide();
+                controller.HideSmooth();
         }
     }
 }
