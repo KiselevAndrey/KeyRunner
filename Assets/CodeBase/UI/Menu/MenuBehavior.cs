@@ -19,6 +19,7 @@ namespace CodeBase.UI.Menu
 
         public void StartingGame()
         {
+            _mediator.Show(MenuWindow.Buttons);
             StartGame?.Invoke();
         }
 

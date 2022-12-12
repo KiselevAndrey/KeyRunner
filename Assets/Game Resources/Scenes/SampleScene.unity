@@ -2280,8 +2280,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1422670125}
-  - component: {fileID: 1422670127}
   - component: {fileID: 1422670126}
+  - component: {fileID: 1422670127}
   m_Layer: 0
   m_Name: Character Manager
   m_TagString: Untagged
@@ -2329,6 +2329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ed6c6ab5676f648ac9c4a806ecfad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 0.2
 --- !u!1 &1459682315
 GameObject:
   m_ObjectHideFlags: 0
