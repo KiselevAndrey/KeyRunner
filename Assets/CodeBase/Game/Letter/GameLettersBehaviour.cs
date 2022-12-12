@@ -7,7 +7,7 @@ using UnityEngine;
 namespace CodeBase.Game.Letter
 {
     [RequireComponent(typeof(LocalPool))]
-    public class GameLettersBehavior : MonoBehaviour
+    public class GameLettersBehaviour : MonoBehaviour
     {
         private readonly int _maxLetters = 34;
 

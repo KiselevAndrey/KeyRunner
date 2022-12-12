@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace CodeBase.UI.Menu
 {
-    public class SelectLvlBehavior : MonoBehaviour
+    public class SelectLvlBehaviour : MonoBehaviour
     {
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
         [SerializeField] private LanguageKeyMapSO _languageKeyMapSO;
-        [SerializeField] private KeyboardBehavior _keyboard;
+        [SerializeField] private KeyboardBehaviour _keyboard;
         [SerializeField] private SelectLvlButton _selectLvlButtonPrefab;
         [SerializeField] private LocalPool _lvlPool;
-        [SerializeField] private MenuBehavior _menu;
+        [SerializeField] private MenuBehaviour _menu;
 
         private void Start()
         {

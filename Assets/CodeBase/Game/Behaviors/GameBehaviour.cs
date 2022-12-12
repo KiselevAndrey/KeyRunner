@@ -7,14 +7,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CodeBase.Game.Behaviors
+namespace CodeBase.Game.Behaviours
 {
-    public class GameBehavior : MonoBehaviour
+    public class GameBehaviour : MonoBehaviour
     {
-        [SerializeField] private KeyboardBehavior _keyboard;
-        [SerializeField] private GameLettersBehavior _gameLetter;
-        [SerializeField] private CharacterBehavior _character;
-        [SerializeField] private LifeBehavior _life;
+        [Header("UI")]
+        [SerializeField] private KeyboardBehaviour _keyboard;
+        [SerializeField] private LifeBehaviour _life;
+
+        [Header("Behaviour")]
+        [SerializeField] private GameLettersBehaviour _gameLetter;
+        [SerializeField] private CharacterBehaviour _character;
+
+        [Header("SO")]
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
         [SerializeField] private LanguageKeyMapSO _languageKeyMapSO;
 

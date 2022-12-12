@@ -3,7 +3,7 @@ using UnityEngine;
 namespace CodeBase.Game.Character
 {
     [RequireComponent(typeof(CharacterMover))]
-    public class CharacterBehavior : MonoBehaviour
+    public class CharacterBehaviour : MonoBehaviour
     {
         [SerializeField] private Transform _character;
 

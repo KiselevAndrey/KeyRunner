@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace CodeBase.UI.Menu
 {
     [RequireComponent(typeof(CanvasGroupController), typeof(MenuMediator))]
-    public class MenuBehavior : MonoBehaviour
+    public class MenuBehaviour : MonoBehaviour
     {
         [Header("Buttons")]
         [SerializeField] private Button _startButton;

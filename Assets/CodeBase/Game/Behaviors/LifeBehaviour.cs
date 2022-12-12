@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.Game.Behaviors
+namespace CodeBase.Game.Behaviours
 {
-    public class LifeBehavior : MonoBehaviour
+    public class LifeBehaviour : MonoBehaviour
     {
         [SerializeField] private Image _lifeFiller;
 

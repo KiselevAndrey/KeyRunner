@@ -1,15 +1,15 @@
-using CodeBase.Game.Behaviors;
+using CodeBase.Game.Behaviours;
 using CodeBase.UI.Menu;
 using CodeBase.UI.Visibility;
 using UnityEngine;
 
 namespace CodeBase
 {
-    public class MainBehavior : MonoBehaviour
+    public class MainBehaviour : MonoBehaviour
     {
         [SerializeField] private MainMediator _mediator;
-        [SerializeField] private GameBehavior _game;
-        [SerializeField] private MenuBehavior _menu;
+        [SerializeField] private GameBehaviour _game;
+        [SerializeField] private MenuBehaviour _menu;
 
         private void Start()
         {
