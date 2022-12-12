@@ -1,6 +1,7 @@
 using CodeBase.Game.Character;
 using CodeBase.Game.Letter;
 using CodeBase.Settings;
+using CodeBase.Settings.Singleton;
 using CodeBase.UI.Keyboard;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,9 @@ namespace CodeBase.Game.Behaviors
         [SerializeField] private LifeBehavior _life;
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
         [SerializeField] private LanguageKeyMapSO _languageKeyMapSO;
-        [SerializeField, Min(0)] private int _selectedLevel;
+
+        private int _round;
+        private readonly int _maxRoundsInLVL = 2;
 
         public event UnityAction EndGame;
 
@@ -28,7 +31,8 @@ namespace CodeBase.Game.Behaviors
         public void StartNewGame()
         {
             ChangeKeyboardLayout();
-            SelectLevel(_selectedLevel);
+            _round = 0;
+            SelectLevel(PlayerInfoSO.SelectedLVL);
             _life.StartNewGame();
             _keyboard.enabled = true;
         }
@@ -45,7 +49,17 @@ namespace CodeBase.Game.Behaviors
 
         private void SelectLevel(int level)
         {
-            var keys = _levelsOfKeysSO.GenerateKeys(level);
+            if(_round >= _maxRoundsInLVL)
+            {
+                _round = 0;
+                level = _levelsOfKeysSO.ApprovedLevel(level + 1);
+                PlayerInfoSO.SelectedLVL = level;
+            }
+
+            var keys = _round == 0
+                ? _levelsOfKeysSO.GetNewKeys(level)
+                : _levelsOfKeysSO.GenerateKeys(level);
+
             List<SimpleLetterInfo> simpleLetters = new();
 
             foreach (var key in keys)
@@ -79,7 +93,8 @@ namespace CodeBase.Game.Behaviors
                 }
                 else
                 {
-                    SelectLevel(_selectedLevel);
+                    _round++;
+                    SelectLevel(PlayerInfoSO.SelectedLVL);
                 }
             }
             else
