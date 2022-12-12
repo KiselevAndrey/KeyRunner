@@ -20,9 +20,11 @@ namespace CodeBase.Game.Letter
         private List<SimpleLetterInfo> _generatedLevelLetters = new();
 
         private SimpleLetterInfo LastLetter => _generatedLevelLetters[LettersLeft - 1];
+        private float SpaceToNextLetter => _letterPrefab.Width + _spaceX;
 
         public int LettersLeft => _pool.SpawnedCount;
         public KeyCode LastKey => LastLetter.Key;
+        public float LastKeyPositionX => _xPos + transform.position.x;
 
         public void CreateLevel(List<SimpleLetterInfo> simpleLetters)
         {
@@ -40,6 +42,7 @@ namespace CodeBase.Game.Letter
         public void NextLetter()
         {
             _pool.DespawnLast();
+            _xPos += SpaceToNextLetter;
         }
 
         public void Hide()
@@ -55,8 +58,6 @@ namespace CodeBase.Game.Letter
         private void RespawnLetters()
         {
             _xPos = 0;
-            var letterWidth = _letterPrefab.Width;
-
             _pool.DespawnAll();
 
             for (int i = 0; i < _generatedLevelLetters.Count; i++)
@@ -64,7 +65,7 @@ namespace CodeBase.Game.Letter
                 var letter = _pool.Spawn(_letterPrefab, new Vector3(_xPos, 0, 0));
                 letter.Init(_generatedLevelLetters[i].Letter);
 
-                _xPos -= letterWidth + _spaceX;
+                _xPos -= SpaceToNextLetter;
             }
         }
     }

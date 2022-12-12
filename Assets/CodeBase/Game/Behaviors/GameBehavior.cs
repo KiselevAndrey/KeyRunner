@@ -70,6 +70,9 @@ namespace CodeBase.Game.Behaviors
 
             _gameLetter.CreateLevel(simpleLetters);
             _keyboard.HighlightDisplay(_gameLetter.LastKey);
+            var letterPos = _gameLetter.transform.position;
+            letterPos.x = _gameLetter.LastKeyPositionX;
+            _character.Init(letterPos);
         }
 
         private void AddInfo(KeyCode key, bool isShifted, ref List<SimpleLetterInfo> leters)
@@ -86,6 +89,7 @@ namespace CodeBase.Game.Behaviors
             if(_gameLetter.IsLastLetter(key, isShifted))
             {
                 _gameLetter.NextLetter();
+                _character.NextPositionX(_gameLetter.LastKeyPositionX);
 
                 if (_gameLetter.LettersLeft > 0)
                 {
@@ -111,6 +115,7 @@ namespace CodeBase.Game.Behaviors
             _keyboard.enabled = false;
             _keyboard.DeselectAllDisplays();
             _gameLetter.Hide();
+            _character.Hide();
             EndGame?.Invoke();
         }
     }
