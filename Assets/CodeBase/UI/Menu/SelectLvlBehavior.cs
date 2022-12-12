@@ -13,14 +13,14 @@ namespace CodeBase.UI.Menu
         [SerializeField] private KeyboardBehavior _keyboard;
         [SerializeField] private SelectLvlButton _selectLvlButtonPrefab;
         [SerializeField] private LocalPool _lvlPool;
-        [SerializeField] private MenuMediator _menuMediator;
+        [SerializeField] private MenuBehavior _menu;
 
         private void Start()
         {
             for (int i = 0; i < _levelsOfKeysSO.Levels.Count; i++)
             {
                 var lvlButton = _lvlPool.Spawn(_selectLvlButtonPrefab);
-                var lvlInfo = _levelsOfKeysSO.Levels[i];
+                //var lvlInfo = _levelsOfKeysSO.Levels[i];
                 lvlButton.Init(i + 1, ShowLvlKeys, OnLevelSelect);
             }
 
@@ -51,7 +51,7 @@ namespace CodeBase.UI.Menu
         {
             level--;
             PlayerInfoSO.SelectedLVL = level;
-            _menuMediator.Show(MenuWindow.Buttons);
+            _menu.StartingGame();
         }
     }
 }

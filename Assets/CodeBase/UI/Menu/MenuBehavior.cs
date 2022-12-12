@@ -10,13 +10,17 @@ namespace CodeBase.UI.Menu
     {
         [Header("Buttons")]
         [SerializeField] private Button _startButton;
-        [SerializeField] private Button _selectLvlButton;
         [SerializeField] private Button _optionsButton;
 
         private CanvasGroupController _visibility;
         private MenuMediator _mediator;
 
         public event UnityAction StartGame;
+
+        public void StartingGame()
+        {
+            StartGame?.Invoke();
+        }
 
         private void Awake()
         {
@@ -28,7 +32,6 @@ namespace CodeBase.UI.Menu
         {
             _visibility.Showed += OnShowed;
             _startButton.onClick.AddListener(OnClickStartGame);
-            _selectLvlButton.onClick.AddListener(OnClickSelectLVL);
             _optionsButton.onClick.AddListener(OnClickOptions);
         }
 
@@ -36,7 +39,6 @@ namespace CodeBase.UI.Menu
         {
             _visibility.Showed -= OnShowed;
             _startButton.onClick.RemoveListener(OnClickStartGame);
-            _selectLvlButton.onClick.RemoveListener(OnClickSelectLVL);
             _optionsButton.onClick.RemoveListener(OnClickOptions);
         }
 
@@ -46,11 +48,6 @@ namespace CodeBase.UI.Menu
         }
 
         private void OnClickStartGame()
-        {
-            StartGame?.Invoke();
-        }
-
-        private void OnClickSelectLVL()
         {
             _mediator.Show(MenuWindow.SelectLVL);
         }
