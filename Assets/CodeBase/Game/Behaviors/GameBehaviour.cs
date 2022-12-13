@@ -25,6 +25,7 @@ namespace CodeBase.Game.Behaviours
         [Header("Behaviours")]
         [SerializeField] private GameLettersBehaviour _gameLetter;
         [SerializeField] private CharacterBehaviour _character;
+        [SerializeField] private EnemyBehaviour _enemy;
 
         [Header("SO")]
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
@@ -46,7 +47,7 @@ namespace CodeBase.Game.Behaviours
         {
             ChangeKeyboardLayout();
             _round = 0;
-            SelectLevel(PlayerInfoSO.SelectedLVL);
+            InitLevel();
             _life.StartNewGame();
             _keyboard.enabled = true;
             _pressEscBehaviour.enabled = true;
@@ -64,12 +65,14 @@ namespace CodeBase.Game.Behaviours
         private void OnEnable()
         {
             _keyboard.PressedKey += OnKeyPressed;
+            _enemy.CharacterCaught += OnCharacterCaught;
             _escButton.onClick.AddListener(OnEscButtonPressed);
         }
 
         private void OnDisable()
         {
             _keyboard.PressedKey -= OnKeyPressed;
+            _enemy.CharacterCaught -= OnCharacterCaught;
             _escButton.onClick.AddListener(OnEscButtonPressed);
         }
         #endregion Unity Lifecycle
@@ -82,6 +85,7 @@ namespace CodeBase.Game.Behaviours
             {
                 _gameLetter.NextLetter();
                 _character.NextPositionX(_gameLetter.LastKeyPositionX);
+                _enemy.NextPositionX(_character.Position.x);
 
                 if (_gameLetter.LettersLeft > 0)
                 {
@@ -90,16 +94,11 @@ namespace CodeBase.Game.Behaviours
                 else
                 {
                     _round++;
-                    SelectLevel(PlayerInfoSO.SelectedLVL);
+                    InitLevel();
                 }
             }
             else
-            {
-                _life.HitMe(1);
-
-                if (_life.IsLive == false)
-                    GameEnded();
-            }
+                Hit(1);
         }
 
         private void OnEscButtonPressed()
@@ -114,11 +113,20 @@ namespace CodeBase.Game.Behaviours
             else
                 _escPopupWindow.Hide();
         }
+
+        private void OnCharacterCaught(int damage)
+        {
+            Hit(damage);
+
+            if (_life.IsLive)
+                InitLevel();
+        }
         #endregion Subscribtions
 
-        private void SelectLevel(int level)
+        private void InitLevel()
         {
-            if(_round >= _maxRoundsInLVL)
+            int level = PlayerInfoSO.SelectedLVL;
+            if (_round >= _maxRoundsInLVL)
             {
                 _round = 0;
                 level = _levelsOfKeysSO.ApprovedLevel(level + 1);
@@ -139,9 +147,8 @@ namespace CodeBase.Game.Behaviours
 
             _gameLetter.CreateLevel(simpleLetters);
             _keyboard.HighlightDisplay(_gameLetter.LastKey);
-            var letterPos = _gameLetter.transform.position;
-            letterPos.x = _gameLetter.LastKeyPositionX;
-            _character.Init(letterPos);
+            InitCharacter();
+            InitEnemy();
         }
 
         private void AddInfo(KeyCode key, bool isShifted, ref List<SimpleLetterInfo> leters)
@@ -153,6 +160,27 @@ namespace CodeBase.Game.Behaviours
             leters.Add(info);
         }
 
+        private void InitCharacter()
+        {
+            var letterPos = _gameLetter.transform.position;
+            letterPos.x = _gameLetter.LastKeyPositionX;
+            _character.Init(letterPos);
+        }
+
+        private void InitEnemy()
+        {
+            _enemy.Init(_character.Position, _character.Body);
+            _enemy.NextPositionX(_character.Position.x);
+        }
+
+        private void Hit(int damage)
+        {
+            _life.HitMe(damage);
+
+            if (_life.IsLive == false)
+                GameEnded();
+        }
+
         private void GameEnded()
         {
             _pressEscBehaviour.enabled = false;
@@ -160,6 +188,7 @@ namespace CodeBase.Game.Behaviours
             _keyboard.DeselectAllDisplays();
             _gameLetter.Hide();
             _character.Hide();
+            _enemy.Hide();
             EndGame?.Invoke();
         }
         #endregion Private

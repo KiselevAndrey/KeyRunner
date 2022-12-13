@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7013852995841627952
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4102490402567380375, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_Name
+      value: Enemy Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402842216479, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5460783
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402842216479, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.46907264
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402842216479, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7830189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543505, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490402981543506, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490403465780856, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: _speed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4102490403465780859, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+      propertyPath: m_Name
+      value: Enemy Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4102490403465780857, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+--- !u!4 &6465145321420311206 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4102490402567380374, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+  m_PrefabInstance: {fileID: 7013852995841627952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6465145322400500043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4102490403465780859, guid: b1e5f0a2773efc949acf2c16acd9cc5f, type: 3}
+  m_PrefabInstance: {fileID: 7013852995841627952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2562767202682007669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6465145322400500043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da255b85c539e6046b43d5266f92b56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Body>k__BackingField: {fileID: 6465145321420311206}
+  _startDistance: 2
+  _catchDistance: 0.6

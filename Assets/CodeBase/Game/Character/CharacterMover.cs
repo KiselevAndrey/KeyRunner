@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CodeBase.Game.Character
 {
@@ -10,6 +11,8 @@ namespace CodeBase.Game.Character
         private Transform _character;
         private Coroutine _moveCoroutine;
 
+        public event UnityAction EndMoving;
+
         public void Init(Vector2 startPosition, Transform character)
         {
             _character = character;
@@ -19,10 +22,14 @@ namespace CodeBase.Game.Character
 
         public void StartMoveToNextPointX(float x)
         {
+            Stop();
+            _moveCoroutine = StartCoroutine(MovingTo(x));
+        }
+
+        public void Stop()
+        {
             if (_moveCoroutine != null)
                 StopCoroutine(_moveCoroutine);
-
-            _moveCoroutine = StartCoroutine(MovingTo(x));
         }
 
         private IEnumerator MovingTo(float x)
@@ -36,6 +43,8 @@ namespace CodeBase.Game.Character
                 yield return null;
             } 
             while (_character.position != finish);
+
+            EndMoving?.Invoke();
         }
     }
 }

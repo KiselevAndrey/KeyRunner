@@ -3,32 +3,12 @@ using UnityEngine;
 namespace CodeBase.Game.Character
 {
     [RequireComponent(typeof(CharacterMover))]
-    public class CharacterBehaviour : MonoBehaviour
+    public class CharacterBehaviour : BaseBehaviour
     {
-        [SerializeField] private Transform _character;
+        public Vector3 Position => Body.position;
 
-        private CharacterMover _mover;
-
-        public void Init(Vector2 lastLetterPos)
+        protected override void OnEndMoving()
         {
-            _mover.Init(lastLetterPos, _character);
-            _character.gameObject.SetActive(true);
-        }
-
-        public void NextPositionX(float xPos)
-        {
-            _mover.StartMoveToNextPointX(xPos);
-        }
-
-        public void Hide()
-        {
-            _character.gameObject.SetActive(false);
-        }
-
-        private void Awake()
-        {
-            _mover = GetComponent<CharacterMover>();
-            Hide();
         }
     }
 }
