@@ -15,6 +15,9 @@ namespace CodeBase.UI.Menu
 
         public void Show(MenuWindow window)
         {
+            if (window == _selected)
+                return;
+
             ShowHide(false);
             _selected = window;
             ShowHide(true);

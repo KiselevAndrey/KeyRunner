@@ -1,19 +1,36 @@
 using CodeBase.Settings;
 using CodeBase.Settings.Singleton;
 using CodeBase.UI.Keyboard;
+using CodeBase.UI.Visibility;
 using CodeBase.Utility;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CodeBase.UI.Menu
 {
+    [RequireComponent(typeof(CanvasGroupController))]
     public class SelectLvlBehaviour : MonoBehaviour
     {
+        [Header("SO")]
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
         [SerializeField] private LanguageKeyMapSO _languageKeyMapSO;
-        [SerializeField] private KeyboardBehaviour _keyboard;
+
+        [Header("Pool")]
         [SerializeField] private SelectLvlButton _selectLvlButtonPrefab;
         [SerializeField] private LocalPool _lvlPool;
+
+        [Header("Other")]
+        [SerializeField] private KeyboardBehaviour _keyboard;
         [SerializeField] private MenuBehaviour _menu;
+        [SerializeField] private Button _escButton;
+
+        private CanvasGroupController _visibility;
+
+        #region Unity Lifecycle
+        private void Awake()
+        {
+            _visibility = GetComponent<CanvasGroupController>();
+        }
 
         private void Start()
         {
@@ -27,6 +44,20 @@ namespace CodeBase.UI.Menu
             _keyboard.InitDisplays(_languageKeyMapSO);
         }
 
+        private void OnEnable()
+        {
+            _visibility.Showing += OnShowing;
+            _escButton.onClick.AddListener(OnEscButtonClick);
+        }
+
+        private void OnDisable()
+        {
+            _visibility.Showing -= OnShowing;
+            _escButton.onClick.RemoveListener(OnEscButtonClick);
+        }
+        #endregion Unity Lifecycle
+
+        #region Private
         private void ShowLvlKeys(int level)
         {
             level--;
@@ -53,5 +84,16 @@ namespace CodeBase.UI.Menu
             PlayerInfoSO.SelectedLVL = level;
             _menu.StartingGame();
         }
+
+        private void OnShowing()
+        {
+            _keyboard.DeselectAllDisplays();
+        }
+
+        private void OnEscButtonClick()
+        {
+            _menu.ShowMenu();
+        }
+        #endregion Private
     }
 }

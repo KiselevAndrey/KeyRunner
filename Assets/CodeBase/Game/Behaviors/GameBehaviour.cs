@@ -2,20 +2,27 @@ using CodeBase.Game.Character;
 using CodeBase.Game.Letter;
 using CodeBase.Settings;
 using CodeBase.Settings.Singleton;
+using CodeBase.UI;
 using CodeBase.UI.Keyboard;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace CodeBase.Game.Behaviours
 {
+    [RequireComponent(typeof(PressEscBehaviour))]
     public class GameBehaviour : MonoBehaviour
     {
+        private readonly int _maxRoundsInLVL = 2;
+
         [Header("UI")]
         [SerializeField] private KeyboardBehaviour _keyboard;
         [SerializeField] private LifeBehaviour _life;
+        [SerializeField] private Button _escButton;
+        [SerializeField] private PopupWindow _escPopupWindow;
 
-        [Header("Behaviour")]
+        [Header("Behaviours")]
         [SerializeField] private GameLettersBehaviour _gameLetter;
         [SerializeField] private CharacterBehaviour _character;
 
@@ -24,7 +31,9 @@ namespace CodeBase.Game.Behaviours
         [SerializeField] private LanguageKeyMapSO _languageKeyMapSO;
 
         private int _round;
-        private readonly int _maxRoundsInLVL = 2;
+        private bool _isPauseNow;
+
+        private PressEscBehaviour _pressEscBehaviour;
 
         public event UnityAction EndGame;
 
@@ -40,17 +49,72 @@ namespace CodeBase.Game.Behaviours
             SelectLevel(PlayerInfoSO.SelectedLVL);
             _life.StartNewGame();
             _keyboard.enabled = true;
+            _pressEscBehaviour.enabled = true;
+            _isPauseNow = false;
+        }
+
+        #region Unity Lifecycle
+        private void Awake()
+        {
+            _pressEscBehaviour = GetComponent<PressEscBehaviour>();
+            _pressEscBehaviour.Init(OnEscButtonPressed);
+            _pressEscBehaviour.enabled = false;
         }
 
         private void OnEnable()
         {
             _keyboard.PressedKey += OnKeyPressed;
+            _escButton.onClick.AddListener(OnEscButtonPressed);
         }
 
         private void OnDisable()
         {
             _keyboard.PressedKey -= OnKeyPressed;
+            _escButton.onClick.AddListener(OnEscButtonPressed);
         }
+        #endregion Unity Lifecycle
+
+        #region Private
+        #region Subscribtions
+        private void OnKeyPressed(KeyCode key, bool isShifted)
+        {
+            if (_gameLetter.IsLastLetter(key, isShifted))
+            {
+                _gameLetter.NextLetter();
+                _character.NextPositionX(_gameLetter.LastKeyPositionX);
+
+                if (_gameLetter.LettersLeft > 0)
+                {
+                    _keyboard.HighlightDisplay(_gameLetter.LastKey);
+                }
+                else
+                {
+                    _round++;
+                    SelectLevel(PlayerInfoSO.SelectedLVL);
+                }
+            }
+            else
+            {
+                _life.HitMe(1);
+
+                if (_life.IsLive == false)
+                    GameEnded();
+            }
+        }
+
+        private void OnEscButtonPressed()
+        {
+            _isPauseNow = !_isPauseNow;
+
+            Time.timeScale = _isPauseNow ? 0 : 1;
+            _keyboard.enabled = _isPauseNow == false;
+
+            if (_isPauseNow)
+                _escPopupWindow.Show("Leave game", "Do you want to leave the game?", GameEnded, OnEscButtonPressed);
+            else
+                _escPopupWindow.Hide();
+        }
+        #endregion Subscribtions
 
         private void SelectLevel(int level)
         {
@@ -89,39 +153,15 @@ namespace CodeBase.Game.Behaviours
             leters.Add(info);
         }
 
-        private void OnKeyPressed(KeyCode key, bool isShifted)
-        {
-            if(_gameLetter.IsLastLetter(key, isShifted))
-            {
-                _gameLetter.NextLetter();
-                _character.NextPositionX(_gameLetter.LastKeyPositionX);
-
-                if (_gameLetter.LettersLeft > 0)
-                {
-                    _keyboard.HighlightDisplay(_gameLetter.LastKey);
-                }
-                else
-                {
-                    _round++;
-                    SelectLevel(PlayerInfoSO.SelectedLVL);
-                }
-            }
-            else
-            {
-                _life.HitMe(1);
-
-                if (_life.IsLive == false)
-                    GameEnded();
-            }
-        }
-
         private void GameEnded()
         {
+            _pressEscBehaviour.enabled = false;
             _keyboard.enabled = false;
             _keyboard.DeselectAllDisplays();
             _gameLetter.Hide();
             _character.Hide();
             EndGame?.Invoke();
         }
+        #endregion Private
     }
 }

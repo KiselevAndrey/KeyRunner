@@ -79,6 +79,9 @@ namespace CodeBase.UI.Visibility
 
         public void ShowSmooth()
         {
+            if (_state == State.Showing || _state == State.Shown)
+                return;
+
             SetState(State.Showing);
 
             _changeAlphaSmooth = StartCoroutine(ChangeAlphaSmooth(1, _duration, EnableInteraction));
