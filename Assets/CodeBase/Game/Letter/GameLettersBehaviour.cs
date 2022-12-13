@@ -9,7 +9,8 @@ namespace CodeBase.Game.Letter
     [RequireComponent(typeof(LocalPool))]
     public class GameLettersBehaviour : MonoBehaviour
     {
-        private readonly int _maxLetters = 34;
+        private readonly int _maxLettersCount = 34;
+        private readonly int _maxCountSameLettersSequentially = 4;
 
         [SerializeField] private GameLetter _letterPrefab;
         [SerializeField, Min(0)] private float _spaceX = 0.1f;
@@ -26,12 +27,34 @@ namespace CodeBase.Game.Letter
         public KeyCode LastKey => LastLetter.Key;
         public float LastKeyPositionX => _xPos + transform.position.x;
 
+        #region Public
         public void CreateLevel(List<SimpleLetterInfo> simpleLetters)
         {
             _generatedLevelLetters.Clear();
+            int countSameLettersSequentially = 0;
+            KeyCode lastGeneratedLetter = KeyCode.None;
 
-            for (int i = 0; i < _maxLetters; i++)
-                _generatedLevelLetters.Add(simpleLetters.Random());
+            for (int i = 0; i < _maxLettersCount; i++)
+            {
+                SimpleLetterInfo nextLetter;
+                do
+                {
+                    nextLetter = simpleLetters.Random();
+                    if (nextLetter.Key == lastGeneratedLetter)
+                    {
+                        if (++countSameLettersSequentially < _maxCountSameLettersSequentially)
+                            break;
+                    }
+                    else
+                    {
+                        countSameLettersSequentially = 0;
+                        lastGeneratedLetter = nextLetter.Key;
+                        break;
+                    }
+                } while (true);
+
+                _generatedLevelLetters.Add(nextLetter);
+            }
 
             RespawnLetters();
         }
@@ -49,6 +72,7 @@ namespace CodeBase.Game.Letter
         {
             _pool.DespawnAll();
         }
+        #endregion Public
 
         private void Awake()
         {
