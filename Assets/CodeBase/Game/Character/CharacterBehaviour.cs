@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CodeBase.Game.Character
 {
@@ -7,8 +8,11 @@ namespace CodeBase.Game.Character
     {
         public Vector3 Position => Body.position;
 
+        public event UnityAction EndMoving;
+
         protected override void OnEndMoving()
         {
+            EndMoving?.Invoke();
         }
     }
 }

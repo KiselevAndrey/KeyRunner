@@ -34,7 +34,7 @@ namespace CodeBase.UI.Menu
 
         private void Start()
         {
-            for (int i = 0; i < _levelsOfKeysSO.Levels.Count; i++)
+            for (int i = 0; i <= _levelsOfKeysSO.MaxLevel; i++)
             {
                 var lvlButton = _lvlPool.Spawn(_selectLvlButtonPrefab);
                 //var lvlInfo = _levelsOfKeysSO.Levels[i];
@@ -66,16 +66,16 @@ namespace CodeBase.UI.Menu
 
             foreach (var info in _levelsOfKeysSO.GenerateKeys(level))
             {
-                _keyboard.PaintKey(info.FirstKeys, Color.yellow);
-                _keyboard.PaintKey(info.SecondKeys, Color.yellow);
+                _keyboard.PaintKey(info.FirstKey, Color.yellow);
+                _keyboard.PaintKey(info.SecondKey, Color.yellow);
             }
 
             var newKeys = _levelsOfKeysSO.GetNewKeys(level)[0];
             if (newKeys.IsShifted)
                 _keyboard.AddShift();
 
-            _keyboard.PaintKey(newKeys.FirstKeys, Color.red);
-            _keyboard.PaintKey(newKeys.SecondKeys, Color.red);
+            _keyboard.PaintKey(newKeys.FirstKey, Color.red);
+            _keyboard.PaintKey(newKeys.SecondKey, Color.red);
         }
 
         private void OnLevelSelect(int level)

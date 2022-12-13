@@ -18,7 +18,8 @@ namespace CodeBase.Game.Character
 
         public virtual void NextPositionX(float xPos)
         {
-            _mover.StartMoveToNextPointX(xPos);
+            if (Body.gameObject.activeSelf)
+                _mover.StartMoveToNextPointX(xPos);
         }
 
         public void Hide()

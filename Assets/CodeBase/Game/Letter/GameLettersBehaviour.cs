@@ -7,10 +7,10 @@ using UnityEngine;
 namespace CodeBase.Game.Letter
 {
     [RequireComponent(typeof(LocalPool))]
-    public class GameLettersBehaviour : MonoBehaviour
+    public class GameLettersBehaviour : BaseGameLettersBehaviour
     {
         private readonly int _maxLettersCount = 34;
-        private readonly int _maxCountSameLettersSequentially = 4;
+        private readonly int _maxCountSameLettersSequentially = 2;
 
         [SerializeField] private GameLetter _letterPrefab;
         [SerializeField, Min(0)] private float _spaceX = 0.1f;
@@ -18,19 +18,16 @@ namespace CodeBase.Game.Letter
         private float _xPos;
 
         private LocalPool _pool;
-        private List<SimpleLetterInfo> _generatedLevelLetters = new();
 
-        private SimpleLetterInfo LastLetter => _generatedLevelLetters[LettersLeft - 1];
         private float SpaceToNextLetter => _letterPrefab.Width + _spaceX;
 
-        public int LettersLeft => _pool.SpawnedCount;
-        public KeyCode LastKey => LastLetter.Key;
-        public float LastKeyPositionX => _xPos + transform.position.x;
+        public override int LettersLeft => _pool.SpawnedCount;
+        public override float LastKeyPositionX => _xPos + transform.position.x;
 
         #region Public
-        public void CreateLevel(List<SimpleLetterInfo> simpleLetters)
+        public override void CreateLevel(List<SimpleLetterInfo> simpleLetters)
         {
-            _generatedLevelLetters.Clear();
+            GeneratedLevelLetters.Clear();
             int countSameLettersSequentially = 0;
             KeyCode lastGeneratedLetter = KeyCode.None;
 
@@ -53,16 +50,13 @@ namespace CodeBase.Game.Letter
                     }
                 } while (true);
 
-                _generatedLevelLetters.Add(nextLetter);
+                GeneratedLevelLetters.Add(nextLetter);
             }
 
             RespawnLetters();
         }
 
-        public bool IsLastLetter(KeyCode key, bool isShifted)
-            => LastLetter.Key == key && LastLetter.IsShifted == isShifted;
-
-        public void NextLetter()
+        public override void NextLetter()
         {
             _pool.DespawnLast();
             _xPos += SpaceToNextLetter;
@@ -84,10 +78,10 @@ namespace CodeBase.Game.Letter
             _xPos = 0;
             _pool.DespawnAll();
 
-            for (int i = 0; i < _generatedLevelLetters.Count; i++)
+            for (int i = 0; i < GeneratedLevelLetters.Count; i++)
             {
                 var letter = _pool.Spawn(_letterPrefab, new Vector3(_xPos, 0, 0));
-                letter.Init(_generatedLevelLetters[i].Letter);
+                letter.Init(GeneratedLevelLetters[i].Letter);
 
                 _xPos -= SpaceToNextLetter;
             }

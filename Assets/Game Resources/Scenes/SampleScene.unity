@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &354987758 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8834035295677459665, guid: dae82ecdd4f108d468d86d3310e1a5c3, type: 3}
-  m_PrefabInstance: {fileID: 3502236702013817697}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab511c54656063441b3a2eacab5861f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &494219950 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8620037883967514609, guid: 3760f9275292d254f9ebec35d9267d2b, type: 3}
@@ -597,6 +586,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1723654499 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4794225227575049471, guid: dae82ecdd4f108d468d86d3310e1a5c3, type: 3}
+  m_PrefabInstance: {fileID: 3502236702013817697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab511c54656063441b3a2eacab5861f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1789709619 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4610452178400935073, guid: dae82ecdd4f108d468d86d3310e1a5c3, type: 3}
@@ -606,6 +606,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1880257040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6203067942285450000, guid: dae82ecdd4f108d468d86d3310e1a5c3, type: 3}
+  m_PrefabInstance: {fileID: 3502236702013817697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376d53a45b584924791338420f82bf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &93478951979545860
@@ -631,7 +642,11 @@ PrefabInstance:
     - target: {fileID: 93478952512120912, guid: f9e72a15316d6264b8383e59727b7496, type: 3}
       propertyPath: _escPopupWindow
       value: 
-      objectReference: {fileID: 354987758}
+      objectReference: {fileID: 1723654499}
+    - target: {fileID: 93478952512120912, guid: f9e72a15316d6264b8383e59727b7496, type: 3}
+      propertyPath: _newLetterDisplay
+      value: 
+      objectReference: {fileID: 1880257040}
     - target: {fileID: 93478953838194642, guid: f9e72a15316d6264b8383e59727b7496, type: 3}
       propertyPath: m_Name
       value: Game

@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: LevelsOfKeysSO
   m_EditorClassIdentifier: 
   <Levels>k__BackingField:
-  - <FirstKeys>k__BackingField: 102
-    <SecondKeys>k__BackingField: 106
+  - <FirstKey>k__BackingField: 102
+    <SecondKey>k__BackingField: 106
     <IsShifted>k__BackingField: 0
-  - <FirstKeys>k__BackingField: 100
-    <SecondKeys>k__BackingField: 107
+  - <FirstKey>k__BackingField: 100
+    <SecondKey>k__BackingField: 107
     <IsShifted>k__BackingField: 0
-  - <FirstKeys>k__BackingField: 115
-    <SecondKeys>k__BackingField: 108
+  - <FirstKey>k__BackingField: 115
+    <SecondKey>k__BackingField: 108
     <IsShifted>k__BackingField: 0
-  - <FirstKeys>k__BackingField: 97
-    <SecondKeys>k__BackingField: 59
+  - <FirstKey>k__BackingField: 97
+    <SecondKey>k__BackingField: 59
     <IsShifted>k__BackingField: 0
-  - <FirstKeys>k__BackingField: 103
-    <SecondKeys>k__BackingField: 104
+  - <FirstKey>k__BackingField: 103
+    <SecondKey>k__BackingField: 104
     <IsShifted>k__BackingField: 0

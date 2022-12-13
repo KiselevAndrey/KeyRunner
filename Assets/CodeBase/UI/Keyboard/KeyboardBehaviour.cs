@@ -18,6 +18,7 @@ namespace CodeBase.UI.Keyboard
 
         public event UnityAction<KeyCode, bool> PressedKey;
 
+        #region Public
         public void InitDisplays(LanguageKeyMapSO keyMapSO)
         {
             foreach (var display in _displays)
@@ -56,6 +57,7 @@ namespace CodeBase.UI.Keyboard
 
         public void PaintKey(KeyCode key, Color color)
             => SelectKey(key, color);
+        #endregion Public
 
         private void Awake()
         {
@@ -71,6 +73,7 @@ namespace CodeBase.UI.Keyboard
             }
         }
 
+        #region Private
         private void UpdateKeysDown(List<KeyCode> keys)
         {
             foreach (var key in keys)
@@ -116,9 +119,13 @@ namespace CodeBase.UI.Keyboard
         {
             var display = FindDisplay(key);
 
-            if (display != null
-                && display != _highlightedDisplay)
-                display.ResetColor();
+            if (display != null)
+            {
+                if (display != _highlightedDisplay)
+                    display.ResetColor();
+                else
+                    display.ChangeColor(Color.yellow); 
+            }
         }
 
         private bool IsSupportiveKeys(KeyCode key)
@@ -136,5 +143,6 @@ namespace CodeBase.UI.Keyboard
             
             return _displays[displayIndex];
         }
+        #endregion Private
     }
 }

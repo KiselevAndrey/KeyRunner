@@ -8,7 +8,7 @@ namespace CodeBase.Settings
     {
         private readonly LevelInfo _spaceInfo = new (KeyCode.Space, KeyCode.None, false);
 
-        [field: SerializeField] public List<LevelInfo> Levels { get; private set; }
+        [field: SerializeField] private List<LevelInfo> Levels { get; set; }
 
         public int MaxLevel => Levels.Count - 1;
 
@@ -29,6 +29,12 @@ namespace CodeBase.Settings
             return infos;
         }
 
+        public LevelInfo GetNewKeysInfo(int level)
+        {
+            level = ApprovedLevel(level);
+            return Levels[level];
+        }
+
         public int ApprovedLevel(int level) 
             => Mathf.Min(level, MaxLevel);
     }
@@ -36,14 +42,14 @@ namespace CodeBase.Settings
     [System.Serializable]
     public class LevelInfo
     {
-        [field: SerializeField] public KeyCode FirstKeys { get; private set; }
-        [field: SerializeField] public KeyCode SecondKeys { get; private set; }
+        [field: SerializeField] public KeyCode FirstKey { get; private set; }
+        [field: SerializeField] public KeyCode SecondKey { get; private set; }
         [field: SerializeField] public bool IsShifted { get; private set; }
 
         public LevelInfo(KeyCode firstKeys, KeyCode secondKeys, bool isShifted)
         {
-            FirstKeys = firstKeys;
-            SecondKeys = secondKeys;
+            FirstKey = firstKeys;
+            SecondKey = secondKeys;
             IsShifted = isShifted;
         }
     }

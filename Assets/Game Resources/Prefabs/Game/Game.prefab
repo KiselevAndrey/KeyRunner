@@ -47,9 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keyboard: {fileID: 0}
   _life: {fileID: 0}
+  _newLetterDisplay: {fileID: 0}
   _escButton: {fileID: 0}
   _escPopupWindow: {fileID: 0}
   _gameLetter: {fileID: 93478952872381867}
+  _trialGameLetter: {fileID: 1788544642611840288}
   _character: {fileID: 93478953250671658}
   _enemy: {fileID: 1326238986081329169}
   _levelsOfKeysSO: {fileID: 11400000, guid: 638d635cb33fec043b29b3564a414863, type: 2}
@@ -77,6 +79,7 @@ GameObject:
   - component: {fileID: 93478952872381866}
   - component: {fileID: 93478952872381876}
   - component: {fileID: 93478952872381867}
+  - component: {fileID: 1788544642611840288}
   m_Layer: 0
   m_Name: Letter Manager
   m_TagString: Untagged
@@ -127,6 +130,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _letterPrefab: {fileID: 8675621866417465335, guid: 0f08fde582c201445a168a1d09f15c15, type: 3}
   _spaceX: 0.1
+--- !u!114 &1788544642611840288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93478952872381865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6e922dcc51b7a44a3dd1a364506350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _path: {x: -10, y: -2}
 --- !u!1 &93478953838194642
 GameObject:
   m_ObjectHideFlags: 0

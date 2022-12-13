@@ -3,6 +3,7 @@ using CodeBase.Game.Letter;
 using CodeBase.Settings;
 using CodeBase.Settings.Singleton;
 using CodeBase.UI;
+using CodeBase.UI.Game;
 using CodeBase.UI.Keyboard;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,16 +15,19 @@ namespace CodeBase.Game.Behaviours
     [RequireComponent(typeof(PressEscBehaviour))]
     public class GameBehaviour : MonoBehaviour
     {
-        private readonly int _maxRoundsInLVL = 2;
+        private readonly int _trialRound = -1;
+        private readonly int _maxRoundsInLVL = 3;
 
         [Header("UI")]
         [SerializeField] private KeyboardBehaviour _keyboard;
         [SerializeField] private LifeBehaviour _life;
+        [SerializeField] private NewLetterDisplayBehaviour _newLetterDisplay;
         [SerializeField] private Button _escButton;
         [SerializeField] private PopupWindow _escPopupWindow;
 
         [Header("Behaviours")]
         [SerializeField] private GameLettersBehaviour _gameLetter;
+        [SerializeField] private TrialGameLettersBehaviour _trialGameLetter;
         [SerializeField] private CharacterBehaviour _character;
         [SerializeField] private EnemyBehaviour _enemy;
 
@@ -33,8 +37,10 @@ namespace CodeBase.Game.Behaviours
 
         private int _round;
         private bool _isPauseNow;
+        private bool _isTrial;
 
         private PressEscBehaviour _pressEscBehaviour;
+        private IGameLettersBehaviour _usedGameLetter;
 
         public event UnityAction EndGame;
 
@@ -46,7 +52,7 @@ namespace CodeBase.Game.Behaviours
         public void StartNewGame()
         {
             ChangeKeyboardLayout();
-            _round = 0;
+            _round = _trialRound;
             InitLevel();
             _life.StartNewGame();
             _keyboard.enabled = true;
@@ -65,6 +71,7 @@ namespace CodeBase.Game.Behaviours
         private void OnEnable()
         {
             _keyboard.PressedKey += OnKeyPressed;
+            _character.EndMoving += OnEndMoving;
             _enemy.CharacterCaught += OnCharacterCaught;
             _escButton.onClick.AddListener(OnEscButtonPressed);
         }
@@ -72,6 +79,7 @@ namespace CodeBase.Game.Behaviours
         private void OnDisable()
         {
             _keyboard.PressedKey -= OnKeyPressed;
+            _character.EndMoving -= OnEndMoving;
             _enemy.CharacterCaught -= OnCharacterCaught;
             _escButton.onClick.AddListener(OnEscButtonPressed);
         }
@@ -81,15 +89,17 @@ namespace CodeBase.Game.Behaviours
         #region Subscribtions
         private void OnKeyPressed(KeyCode key, bool isShifted)
         {
-            if (_gameLetter.IsLastLetter(key, isShifted))
+            if (_usedGameLetter.IsLastLetter(key, isShifted))
             {
-                _gameLetter.NextLetter();
-                _character.NextPositionX(_gameLetter.LastKeyPositionX);
-                _enemy.NextPositionX(_character.Position.x);
+                _usedGameLetter.NextLetter();
+                _character.NextPositionX(_usedGameLetter.LastKeyPositionX);
 
-                if (_gameLetter.LettersLeft > 0)
+                if(_isTrial == false)
+                    _enemy.NextPositionX(_character.Position.x);
+
+                if (_usedGameLetter.LettersLeft > 0)
                 {
-                    _keyboard.HighlightDisplay(_gameLetter.LastKey);
+                    _keyboard.HighlightDisplay(_usedGameLetter.LastKey);
                 }
                 else
                 {
@@ -99,6 +109,27 @@ namespace CodeBase.Game.Behaviours
             }
             else
                 Hit(1);
+        }
+
+        private void OnEndMoving()
+        {
+            if (_isTrial == false)
+                return;
+
+            _round++;
+            InitLevel();
+        }
+
+        private void OnCharacterCaught(int damage)
+        {
+            if (_isTrial)
+                return;
+
+            Hit(damage);
+
+            // Wait Die Animation
+            if (_life.IsLive)
+                InitLevel();
         }
 
         private void OnEscButtonPressed()
@@ -113,27 +144,76 @@ namespace CodeBase.Game.Behaviours
             else
                 _escPopupWindow.Hide();
         }
-
-        private void OnCharacterCaught(int damage)
-        {
-            Hit(damage);
-
-            if (_life.IsLive)
-                InitLevel();
-        }
         #endregion Subscribtions
 
         private void InitLevel()
         {
-            int level = PlayerInfoSO.SelectedLVL;
+            print("Init level");
+            int level = GiveLVL(PlayerInfoSO.SelectedLVL);
+
+            // check is over last LVL
+            if(level > _levelsOfKeysSO.MaxLevel)
+            {
+                GameEnded();
+                return;
+            }
+
+            List<SimpleLetterInfo> simpleLetters 
+                = _round == _trialRound
+                ? InitTrialLevelKeys(level)
+                : InitNormalLevelKeys(level);
+
+            _usedGameLetter.CreateLevel(simpleLetters);
+            InitCharacter();
+
+            if (_isTrial)
+            {
+                _enemy.Hide();
+                _usedGameLetter.NextLetter();
+                _character.NextPositionX(_usedGameLetter.LastKeyPositionX);
+            }
+            else
+                InitEnemy();
+
+            _keyboard.HighlightDisplay(_usedGameLetter.LastKey);
+        }
+
+        private int GiveLVL(int currentLVL)
+        {
+            // check is new lvl
             if (_round >= _maxRoundsInLVL)
             {
-                _round = 0;
-                level = _levelsOfKeysSO.ApprovedLevel(level + 1);
+                currentLVL++;
+                _round = _trialRound;
+                int level = _levelsOfKeysSO.ApprovedLevel(currentLVL);
                 PlayerInfoSO.SelectedLVL = level;
             }
 
-            var keys = _round == 0
+            return currentLVL;
+        }
+
+        private List<SimpleLetterInfo> InitTrialLevelKeys(int level)
+        {
+            _isTrial = true;
+            _usedGameLetter = _trialGameLetter;
+
+            var keyInfo = _levelsOfKeysSO.GetNewKeysInfo(level);
+            List<SimpleLetterInfo> simpleLetters = new();
+            AddInfo(keyInfo.FirstKey, keyInfo.IsShifted, ref simpleLetters);
+            AddInfo(keyInfo.SecondKey, keyInfo.IsShifted, ref simpleLetters);
+
+            _newLetterDisplay.Show(keyInfo, _languageKeyMapSO);
+         
+            return simpleLetters;
+        }
+
+        private List<SimpleLetterInfo> InitNormalLevelKeys(int level)
+        {
+            _isTrial = false;
+            _usedGameLetter = _gameLetter;
+            _newLetterDisplay.Hide();
+
+            var keys = _round == _trialRound + 1
                 ? _levelsOfKeysSO.GetNewKeys(level)
                 : _levelsOfKeysSO.GenerateKeys(level);
 
@@ -141,14 +221,11 @@ namespace CodeBase.Game.Behaviours
 
             foreach (var key in keys)
             {
-                AddInfo(key.FirstKeys, key.IsShifted, ref simpleLetters);
-                AddInfo(key.SecondKeys, key.IsShifted, ref simpleLetters);
+                AddInfo(key.FirstKey, key.IsShifted, ref simpleLetters);
+                AddInfo(key.SecondKey, key.IsShifted, ref simpleLetters);
             }
 
-            _gameLetter.CreateLevel(simpleLetters);
-            _keyboard.HighlightDisplay(_gameLetter.LastKey);
-            InitCharacter();
-            InitEnemy();
+            return simpleLetters;
         }
 
         private void AddInfo(KeyCode key, bool isShifted, ref List<SimpleLetterInfo> leters)
@@ -163,7 +240,7 @@ namespace CodeBase.Game.Behaviours
         private void InitCharacter()
         {
             var letterPos = _gameLetter.transform.position;
-            letterPos.x = _gameLetter.LastKeyPositionX;
+            letterPos.x = _usedGameLetter.LastKeyPositionX;
             _character.Init(letterPos);
         }
 
