@@ -10,6 +10,11 @@ namespace CodeBase.Game.Character
 
         public event UnityAction EndMoving;
 
+        protected override void OnAwake()
+        {
+            Mover = GetComponent<CharacterMover>();
+        }
+
         protected override void OnEndMoving()
         {
             EndMoving?.Invoke();

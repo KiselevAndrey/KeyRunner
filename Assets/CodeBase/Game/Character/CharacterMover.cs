@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace CodeBase.Game.Character
 {
-    public class CharacterMover : MonoBehaviour
+    public class CharacterMover : MonoBehaviour, IMover
     {
         [SerializeField, Min(0)] private float _speed;
 
@@ -12,6 +12,8 @@ namespace CodeBase.Game.Character
         private Coroutine _moveCoroutine;
 
         public event UnityAction EndMoving;
+
+        protected virtual float Speed => _speed;
 
         public void Init(Vector2 startPosition, Transform character)
         {
@@ -27,7 +29,7 @@ namespace CodeBase.Game.Character
             _moveCoroutine = StartCoroutine(MovingTo(x));
         }
 
-        public void Stop()
+        private void Stop()
         {
             if (_moveCoroutine != null)
                 StopCoroutine(_moveCoroutine);
@@ -40,7 +42,7 @@ namespace CodeBase.Game.Character
 
             do
             {
-                _character.position = Vector3.MoveTowards(_character.position, finish, _speed * Time.deltaTime);
+                _character.position = Vector3.MoveTowards(_character.position, finish, Speed * Time.deltaTime);
                 yield return null;
             } 
             while (_character.position != finish);

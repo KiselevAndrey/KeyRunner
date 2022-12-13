@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace CodeBase.Game.Character
 {
-    [RequireComponent(typeof(CharacterMover))]
+    [RequireComponent(typeof(EnemyMover))]
     public class EnemyBehaviour : BaseBehaviour
     {
         [SerializeField, Min(0)] private float _startDistance = 2f;
@@ -24,6 +24,11 @@ namespace CodeBase.Game.Character
         public override void NextPositionX(float xPos)
         {
             base.NextPositionX(xPos - _catchDistance);
+        }
+
+        protected override void OnAwake()
+        {
+            Mover = GetComponent<EnemyMover>();
         }
 
         protected override void OnEndMoving()

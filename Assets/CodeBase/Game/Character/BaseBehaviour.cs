@@ -2,24 +2,23 @@ using UnityEngine;
 
 namespace CodeBase.Game.Character
 {
-    [RequireComponent(typeof(CharacterMover))]
     public abstract class BaseBehaviour : MonoBehaviour
     {
         [field: SerializeField] public Transform Body { get; private set; }
 
-        private CharacterMover _mover;
+        protected IMover Mover;
 
         #region Public
         public void Init(Vector2 initPos)
         {
-            _mover.Init(initPos, Body);
+            Mover.Init(initPos, Body);
             Body.gameObject.SetActive(true);
         }
 
         public virtual void NextPositionX(float xPos)
         {
             if (Body.gameObject.activeSelf)
-                _mover.StartMoveToNextPointX(xPos);
+                Mover.StartMoveToNextPointX(xPos);
         }
 
         public void Hide()
@@ -28,23 +27,24 @@ namespace CodeBase.Game.Character
         }
         #endregion Public
 
+        protected abstract void OnAwake();
         protected abstract void OnEndMoving();
 
         #region Unity Lifecycle
         private void Awake()
         {
-            _mover = GetComponent<CharacterMover>();
+            OnAwake();
             Hide();
         }
 
         private void OnEnable()
         {
-            _mover.EndMoving += OnEndMoving;
+            Mover.EndMoving += OnEndMoving;
         }
 
         private void OnDisable()
         {
-            _mover.EndMoving -= OnEndMoving;
+            Mover.EndMoving -= OnEndMoving;
         }
         #endregion Unity Lifecycle
     }

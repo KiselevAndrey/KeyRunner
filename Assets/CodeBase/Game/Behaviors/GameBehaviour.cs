@@ -55,6 +55,7 @@ namespace CodeBase.Game.Behaviours
             _round = _trialRound;
             InitLevel();
             _life.StartNewGame();
+            PlayerInfoSO.LevelsEnded = 0;
             _keyboard.enabled = true;
             _pressEscBehaviour.enabled = true;
             _isPauseNow = false;
@@ -148,7 +149,6 @@ namespace CodeBase.Game.Behaviours
 
         private void InitLevel()
         {
-            print("Init level");
             int level = GiveLVL(PlayerInfoSO.SelectedLVL);
 
             // check is over last LVL
@@ -187,6 +187,7 @@ namespace CodeBase.Game.Behaviours
                 _round = _trialRound;
                 int level = _levelsOfKeysSO.ApprovedLevel(currentLVL);
                 PlayerInfoSO.SelectedLVL = level;
+                PlayerInfoSO.LevelsEnded++;
             }
 
             return currentLVL;

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace CodeBase.Settings.Singleton
 {
@@ -10,18 +9,12 @@ namespace CodeBase.Settings.Singleton
     public class PlayerInfoSO : SingletonScriptableObject<PlayerInfoSO>
     {
         [SerializeField] private int _selectedLVL;
+        [SerializeField] private int _levelsEnded;
         [SerializeField] private Language _language;
         [SerializeField] private KeyboardLayout _keyboard;
 
-        public static int SelectedLVL
-        {
-            get => Instance._selectedLVL;
-            set
-            {
-                Instance._selectedLVL = value;
-                LVLSelected?.Invoke(value);
-            }
-        }
+        public static int SelectedLVL { get => Instance._selectedLVL; set => Instance._selectedLVL = value; }
+        public static int LevelsEnded { get => Instance._levelsEnded; set => Instance._levelsEnded = value; }
 
         public Language Language
         {
@@ -40,7 +33,5 @@ namespace CodeBase.Settings.Singleton
                 _keyboard = value;
             }
         }
-
-        public static event UnityAction<int> LVLSelected;
     }
 }
