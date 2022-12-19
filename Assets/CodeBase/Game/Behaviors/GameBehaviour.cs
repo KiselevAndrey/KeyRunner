@@ -58,7 +58,6 @@ namespace CodeBase.Game.Behaviours
             PlayerInfoSO.LevelsEnded = 0;
             _keyboard.enabled = true;
             _pressEscBehaviour.enabled = true;
-            _isPauseNow = false;
         }
 
         #region Unity Lifecycle
@@ -267,6 +266,8 @@ namespace CodeBase.Game.Behaviours
             _gameLetter.Hide();
             _character.Hide();
             _enemy.Hide();
+            _isPauseNow = false;
+            Time.timeScale = 1f;
             EndGame?.Invoke();
         }
         #endregion Private
