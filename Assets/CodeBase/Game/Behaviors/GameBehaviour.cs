@@ -55,7 +55,7 @@ namespace CodeBase.Game.Behaviours
             _round = _trialRound;
             InitLevel();
             _life.StartNewGame();
-            PlayerInfoSO.LevelsEnded = 0;
+            PlayerInfoSO.StartNewGame();
             _keyboard.enabled = true;
             _pressEscBehaviour.enabled = true;
         }
@@ -98,14 +98,9 @@ namespace CodeBase.Game.Behaviours
                     _enemy.NextPositionX(_character.Position.x);
 
                 if (_usedGameLetter.LettersLeft > 0)
-                {
                     _keyboard.HighlightDisplay(_usedGameLetter.LastKey);
-                }
                 else
-                {
-                    _round++;
-                    InitLevel();
-                }
+                    EndRound();
             }
             else
                 Hit(1);
@@ -129,7 +124,10 @@ namespace CodeBase.Game.Behaviours
 
             // Wait Die Animation
             if (_life.IsLive)
+            {
+                PlayerInfoSO.CaughtTimes++;
                 InitLevel();
+            }
         }
 
         private void OnEscButtonPressed()
@@ -145,6 +143,13 @@ namespace CodeBase.Game.Behaviours
                 _escPopupWindow.Hide();
         }
         #endregion Subscribtions
+
+        private void EndRound()
+        {
+            _round++;
+            PlayerInfoSO.RoundsEnded++;
+            InitLevel();
+        }
 
         private void InitLevel()
         {
@@ -186,7 +191,6 @@ namespace CodeBase.Game.Behaviours
                 _round = _trialRound;
                 int level = _levelsOfKeysSO.ApprovedLevel(currentLVL);
                 PlayerInfoSO.SelectedLVL = level;
-                PlayerInfoSO.LevelsEnded++;
             }
 
             return currentLVL;

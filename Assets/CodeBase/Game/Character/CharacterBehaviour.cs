@@ -17,6 +17,8 @@ namespace CodeBase.Game.Character
 
         protected override void OnEndMoving()
         {
+            base.OnEndMoving();
+
             EndMoving?.Invoke();
         }
     }

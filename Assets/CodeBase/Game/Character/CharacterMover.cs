@@ -11,6 +11,7 @@ namespace CodeBase.Game.Character
         private Transform _character;
         private Coroutine _moveCoroutine;
 
+        public event UnityAction StartMoving;
         public event UnityAction EndMoving;
 
         protected virtual float Speed => _speed;
@@ -37,6 +38,8 @@ namespace CodeBase.Game.Character
 
         private IEnumerator MovingTo(float x)
         {
+            StartMoving?.Invoke();
+
             var finish = _character.position;
             finish.x = x;
 

@@ -9,12 +9,14 @@ namespace CodeBase.Settings.Singleton
     public class PlayerInfoSO : SingletonScriptableObject<PlayerInfoSO>
     {
         [SerializeField] private int _selectedLVL;
-        [SerializeField] private int _levelsEnded;
+        [SerializeField] private int _roundsEnded;
+        [SerializeField] private int _caughtTimes;
         [SerializeField] private Language _language;
         [SerializeField] private KeyboardLayout _keyboard;
 
         public static int SelectedLVL { get => Instance._selectedLVL; set => Instance._selectedLVL = value; }
-        public static int LevelsEnded { get => Instance._levelsEnded; set => Instance._levelsEnded = value; }
+        public static int RoundsEnded { get => Instance._roundsEnded; set => Instance._roundsEnded = value; }
+        public static int CaughtTimes { get => Instance._caughtTimes; set => Instance._caughtTimes = value; }
 
         public Language Language
         {
@@ -32,6 +34,12 @@ namespace CodeBase.Settings.Singleton
             {
                 _keyboard = value;
             }
+        }
+
+        public static void StartNewGame()
+        {
+            RoundsEnded = 0;
+            CaughtTimes = 0;
         }
     }
 }

@@ -6,8 +6,9 @@ namespace CodeBase.Game.Character
     [RequireComponent(typeof(EnemyMover))]
     public class EnemyBehaviour : BaseBehaviour
     {
-        [SerializeField, Min(0)] private float _startDistance = 2f;
-        [SerializeField, Min(0)] private float _catchDistance = .5f;
+        [SerializeField, Range(1, 4)] private float _startDistance = 2f;
+        [SerializeField, Range(0, 1)] private float _catchDistance = .6f;
+        [SerializeField, Range(0, 1)] private float _endDistance = .5f;
         [SerializeField, Min(0)] private int _damage = 10;
 
         private Transform _target;
@@ -23,7 +24,7 @@ namespace CodeBase.Game.Character
 
         public override void NextPositionX(float xPos)
         {
-            base.NextPositionX(xPos - _catchDistance);
+            base.NextPositionX(xPos - _endDistance);
         }
 
         protected override void OnAwake()
@@ -34,7 +35,10 @@ namespace CodeBase.Game.Character
         protected override void OnEndMoving()
         {
             if (_target.position.x - _catchDistance <= Body.position.x)
+            {
+                base.OnEndMoving();
                 CharacterCaught?.Invoke(_damage);
+            }
             else
                 NextPositionX(_target.position.x);
         }
