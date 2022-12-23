@@ -1,5 +1,6 @@
 using CodeBase.Settings;
 using CodeBase.UI.Visibility;
+using TMPro;
 using UnityEngine;
 
 namespace CodeBase.UI.Game
@@ -9,6 +10,7 @@ namespace CodeBase.UI.Game
     {
         [SerializeField] private SimpleLetterDisplay _firstLetter;
         [SerializeField] private SimpleLetterDisplay _secondLetter;
+        [SerializeField] private TMP_Text _remainsToTypeText;
 
         private CanvasGroupController _visibility;
 
@@ -22,6 +24,11 @@ namespace CodeBase.UI.Game
         public void Hide()
         {
             _visibility.HideSmooth();
+        }
+
+        public void ChangeRemainsCount(int count)
+        {
+            _remainsToTypeText.text = count.ToString();
         }
 
         private void Awake()

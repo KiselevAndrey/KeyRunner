@@ -97,7 +97,9 @@ namespace CodeBase.Game.Behaviours
                 _usedGameLetter.NextLetter();
                 _character.NextPositionX(_usedGameLetter.LastKeyPositionX);
 
-                if(_isTrial == false)
+                if (_isTrial)
+                    _newLetterDisplay.ChangeRemainsCount(_usedGameLetter.LettersLeft);
+                else
                     _enemy.NextPositionX(_character.Position.x);
 
                 if (_usedGameLetter.LettersLeft > 0)
@@ -178,6 +180,7 @@ namespace CodeBase.Game.Behaviours
                 _enemy.Hide();
                 _usedGameLetter.NextLetter();
                 _character.NextPositionX(_usedGameLetter.LastKeyPositionX);
+                _newLetterDisplay.ChangeRemainsCount(_usedGameLetter.LettersLeft);
             }
             else
                 InitEnemy();
