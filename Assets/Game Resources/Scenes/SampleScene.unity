@@ -627,6 +627,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 51181354187496898, guid: f9e72a15316d6264b8383e59727b7496, type: 3}
+      propertyPath: m_ChunkCullingBounds.x
+      value: 0.007246375
+      objectReference: {fileID: 0}
+    - target: {fileID: 51181354187496898, guid: f9e72a15316d6264b8383e59727b7496, type: 3}
+      propertyPath: m_ChunkCullingBounds.y
+      value: 0.007246375
+      objectReference: {fileID: 0}
     - target: {fileID: 93478952512120912, guid: f9e72a15316d6264b8383e59727b7496, type: 3}
       propertyPath: _life
       value: 

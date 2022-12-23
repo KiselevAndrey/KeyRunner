@@ -30,6 +30,7 @@ namespace CodeBase.Game.Behaviours
         [SerializeField] private TrialGameLettersBehaviour _trialGameLetter;
         [SerializeField] private CharacterBehaviour _character;
         [SerializeField] private EnemyBehaviour _enemy;
+        [SerializeField] private WorldBehaviour _world;
 
         [Header("SO")]
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
@@ -58,6 +59,7 @@ namespace CodeBase.Game.Behaviours
             PlayerInfoSO.StartNewGame();
             _keyboard.enabled = true;
             _pressEscBehaviour.enabled = true;
+            _world.Show();
         }
 
         #region Unity Lifecycle
@@ -66,6 +68,7 @@ namespace CodeBase.Game.Behaviours
             _pressEscBehaviour = GetComponent<PressEscBehaviour>();
             _pressEscBehaviour.Init(OnEscButtonPressed);
             _pressEscBehaviour.enabled = false;
+            _world.Hide();
         }
 
         private void OnEnable()
@@ -270,6 +273,7 @@ namespace CodeBase.Game.Behaviours
             _gameLetter.Hide();
             _character.Hide();
             _enemy.Hide();
+            _world.Hide();
             _isPauseNow = false;
             Time.timeScale = 1f;
             EndGame?.Invoke();
