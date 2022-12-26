@@ -21,6 +21,12 @@ namespace CodeBase.Game.Character
                 Mover.StartMoveToNextPointX(xPos);
         }
 
+        public void StopMoving()
+        {
+            Mover.Stop();
+            OnEndMoving();
+        }
+
         public void Hide()
         {
             Body.gameObject.SetActive(false);

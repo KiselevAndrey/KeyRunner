@@ -12,12 +12,6 @@ namespace CodeBase.Game.Character
 
         public event UnityAction EndMoving;
 
-        public void StopMoving()
-        {
-            Mover.Stop();
-            OnEndMoving();
-        }
-
         protected override void OnAwake()
         {
             Mover = GetComponent<CharacterMover>();

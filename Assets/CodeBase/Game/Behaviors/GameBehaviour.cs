@@ -1,10 +1,12 @@
 using CodeBase.Game.Character;
 using CodeBase.Game.Letter;
+using CodeBase.Game.Statistics;
 using CodeBase.Settings;
 using CodeBase.Settings.Singleton;
 using CodeBase.UI;
 using CodeBase.UI.Game;
 using CodeBase.UI.Keyboard;
+using CodeBase.UI.PopupWindow;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,7 +14,7 @@ using UnityEngine.UI;
 
 namespace CodeBase.Game.Behaviours
 {
-    [RequireComponent(typeof(PressEscBehaviour))]
+    [RequireComponent(typeof(PressEscBehaviour), typeof(StatisticsBehaviour))]
     public class GameBehaviour : MonoBehaviour
     {
         private readonly int _trialRound = -1;
@@ -23,7 +25,8 @@ namespace CodeBase.Game.Behaviours
         [SerializeField] private LifeBehaviour _life;
         [SerializeField] private NewLetterDisplayBehaviour _newLetterDisplay;
         [SerializeField] private Button _escButton;
-        [SerializeField] private PopupWindow _escPopupWindow;
+        [SerializeField] private PopupWindowWithTwoButtonsAndText _escPopupWindow;
+        [SerializeField] private StatisticsPopupWindow _statisticPopupWindow;
 
         [Header("Behaviours")]
         [SerializeField] private GameLettersBehaviour _gameLetter;
@@ -40,6 +43,7 @@ namespace CodeBase.Game.Behaviours
         private bool _isPauseNow;
         private bool _isTrial;
 
+        private StatisticsBehaviour _statistics;
         private PressEscBehaviour _pressEscBehaviour;
         private IGameLettersBehaviour _usedGameLetter;
 
@@ -56,6 +60,7 @@ namespace CodeBase.Game.Behaviours
             _round = _trialRound;
             InitLevel();
             _life.StartNewGame(30);
+            _statistics.StartNewGame();
             PlayerInfoSO.StartNewGame();
             _keyboard.enabled = true;
             _pressEscBehaviour.enabled = true;
@@ -65,6 +70,7 @@ namespace CodeBase.Game.Behaviours
         #region Unity Lifecycle
         private void Awake()
         {
+            _statistics = GetComponent<StatisticsBehaviour>();
             _pressEscBehaviour = GetComponent<PressEscBehaviour>();
             _pressEscBehaviour.Init(OnEscButtonPressed);
             _pressEscBehaviour.enabled = false;
@@ -102,7 +108,10 @@ namespace CodeBase.Game.Behaviours
                 if (_isTrial)
                     _newLetterDisplay.ChangeRemainsCount(_usedGameLetter.LettersLeft);
                 else
+                {
+                    _statistics.CorrectKey();
                     _enemy.NextPositionX(_character.Position.x);
+                }
 
                 if (_usedGameLetter.LettersLeft > 0)
                     _keyboard.HighlightDisplay(_usedGameLetter.LastKey);
@@ -110,7 +119,10 @@ namespace CodeBase.Game.Behaviours
                     EndRound();
             }
             else
+            {
+                _statistics.WrongKey();
                 Hit(1);
+            }
         }
 
         private void OnEndMoving()
@@ -128,6 +140,8 @@ namespace CodeBase.Game.Behaviours
                 return;
 
             _character.StopMoving();
+            _enemy.StopMoving();
+            _statistics.EndRound();
         }
 
         private void OnHuntingEnded(int damage)
@@ -159,6 +173,10 @@ namespace CodeBase.Game.Behaviours
         {
             _round++;
             PlayerInfoSO.RoundsEnded++;
+
+            if(_isTrial == false)
+                _statistics.EndRound();
+
             InitLevel();
         }
 
@@ -189,7 +207,10 @@ namespace CodeBase.Game.Behaviours
                 _newLetterDisplay.ChangeRemainsCount(_usedGameLetter.LettersLeft);
             }
             else
+            {
                 InitEnemy();
+                _statistics.StartNewRound();
+            }
 
             _keyboard.HighlightDisplay(_usedGameLetter.LastKey);
         }
@@ -278,7 +299,15 @@ namespace CodeBase.Game.Behaviours
         {
             _pressEscBehaviour.enabled = false;
             _keyboard.enabled = false;
+            _statistics.EndGame();
             _keyboard.DeselectAllDisplays();
+            _character.StopMoving();
+            _enemy.StopMoving();
+            _statisticPopupWindow.Show(EndShowStatistics);
+        }
+
+        private void EndShowStatistics()
+        {
             _gameLetter.Hide();
             _character.Hide();
             _enemy.Hide();

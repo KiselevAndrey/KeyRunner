@@ -32,6 +32,7 @@ namespace CodeBase.Game.Character
 
         public void Stop()
         {
+            print($"{gameObject} stopped {_moveCoroutine}");
             if (_moveCoroutine != null)
                 StopCoroutine(_moveCoroutine);
         }
