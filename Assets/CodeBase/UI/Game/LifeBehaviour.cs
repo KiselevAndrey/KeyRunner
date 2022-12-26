@@ -25,10 +25,10 @@ namespace CodeBase.UI.Game
 
         public bool IsLive => CurrentLife > 0;
 
-        public void StartNewGame()
+        public void StartNewGame(int maxLife)
         {
-            _maxLife = 30;
-            CurrentLife = 30;
+            _maxLife = maxLife;
+            CurrentLife = maxLife;
         }
 
         public void HitMe(int value)

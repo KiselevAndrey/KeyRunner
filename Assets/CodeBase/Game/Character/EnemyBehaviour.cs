@@ -12,8 +12,10 @@ namespace CodeBase.Game.Character
         [SerializeField, Min(0)] private int _damage = 10;
 
         private Transform _target;
+        private EnemyHuntingBehaviour _huntingBehaviour;
 
-        public event UnityAction<int> CharacterCaught;
+        public event UnityAction CharacterCaught;
+        public event UnityAction<int> HuntingEnding;
 
         public void Init(Vector2 initPos, Transform characterBody)
         {
@@ -30,17 +32,21 @@ namespace CodeBase.Game.Character
         protected override void OnAwake()
         {
             Mover = GetComponent<EnemyMover>();
+            _huntingBehaviour = GetComponent<EnemyHuntingBehaviour>();
         }
 
         protected override void OnEndMoving()
         {
             if (_target.position.x - _catchDistance <= Body.position.x)
             {
-                base.OnEndMoving();
-                CharacterCaught?.Invoke(_damage);
+                CharacterCaught?.Invoke();
+                _huntingBehaviour.StartHunting(EndHuntingAction);
             }
             else
                 NextPositionX(_target.position.x);
         }
+
+        private void EndHuntingAction()
+            => HuntingEnding?.Invoke(_damage);
     }
 }

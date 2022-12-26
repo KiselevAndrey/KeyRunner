@@ -55,7 +55,7 @@ namespace CodeBase.Game.Behaviours
             ChangeKeyboardLayout();
             _round = _trialRound;
             InitLevel();
-            _life.StartNewGame();
+            _life.StartNewGame(30);
             PlayerInfoSO.StartNewGame();
             _keyboard.enabled = true;
             _pressEscBehaviour.enabled = true;
@@ -76,6 +76,7 @@ namespace CodeBase.Game.Behaviours
             _keyboard.PressedKey += OnKeyPressed;
             _character.EndMoving += OnEndMoving;
             _enemy.CharacterCaught += OnCharacterCaught;
+            _enemy.HuntingEnding += OnHuntingEnded;
             _escButton.onClick.AddListener(OnEscButtonPressed);
         }
 
@@ -84,7 +85,8 @@ namespace CodeBase.Game.Behaviours
             _keyboard.PressedKey -= OnKeyPressed;
             _character.EndMoving -= OnEndMoving;
             _enemy.CharacterCaught -= OnCharacterCaught;
-            _escButton.onClick.AddListener(OnEscButtonPressed);
+            _enemy.HuntingEnding -= OnHuntingEnded;
+            _escButton.onClick.RemoveListener(OnEscButtonPressed);
         }
         #endregion Unity Lifecycle
 
@@ -120,14 +122,18 @@ namespace CodeBase.Game.Behaviours
             InitLevel();
         }
 
-        private void OnCharacterCaught(int damage)
+        private void OnCharacterCaught()
         {
             if (_isTrial)
                 return;
 
+            _character.StopMoving();
+        }
+
+        private void OnHuntingEnded(int damage)
+        {
             Hit(damage);
 
-            // Wait Die Animation
             if (_life.IsLive)
             {
                 PlayerInfoSO.CaughtTimes++;

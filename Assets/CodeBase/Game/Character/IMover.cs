@@ -10,5 +10,6 @@ namespace CodeBase.Game.Character
 
         public void Init(Vector2 startPosition, Transform character);
         public void StartMoveToNextPointX(float x);
+        public void Stop();
     }
 }

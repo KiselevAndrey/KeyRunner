@@ -2,14 +2,11 @@ using UnityEngine;
 
 namespace CodeBase.Game.Character
 {
-    [RequireComponent(typeof(CharacterAnimatorBehaviour))]
     public abstract class BaseBehaviour : MonoBehaviour
     {
         [field: SerializeField] public Transform Body { get; private set; }
 
         protected IMover Mover;
-
-        private CharacterAnimatorBehaviour _animator;
 
         #region Public
         public void Init(Vector2 initPos)
@@ -31,17 +28,12 @@ namespace CodeBase.Game.Character
         #endregion Public
 
         protected abstract void OnAwake();
-
-        protected virtual void OnStartMoving()
-            => _animator.SetMoveParameter(true);
-        protected virtual void OnEndMoving()
-            => _animator.SetMoveParameter(false);
+        protected virtual void OnStartMoving() { }
+        protected abstract void OnEndMoving();
 
         #region Unity Lifecycle
         private void Awake()
         {
-            _animator = GetComponent<CharacterAnimatorBehaviour>();
-
             OnAwake();
             Hide();
         }

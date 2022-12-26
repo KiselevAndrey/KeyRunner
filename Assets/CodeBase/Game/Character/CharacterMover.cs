@@ -30,7 +30,7 @@ namespace CodeBase.Game.Character
             _moveCoroutine = StartCoroutine(MovingTo(x));
         }
 
-        private void Stop()
+        public void Stop()
         {
             if (_moveCoroutine != null)
                 StopCoroutine(_moveCoroutine);
