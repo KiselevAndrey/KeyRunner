@@ -24,7 +24,7 @@ namespace CodeBase.Game.Character
         public void StopMoving()
         {
             Mover.Stop();
-            OnEndMoving();
+            OnStoptMoving();
         }
 
         public void Hide()
@@ -35,6 +35,7 @@ namespace CodeBase.Game.Character
 
         protected abstract void OnAwake();
         protected virtual void OnStartMoving() { }
+        protected virtual void OnStoptMoving() { }
         protected abstract void OnEndMoving();
 
         #region Unity Lifecycle

@@ -8,7 +8,7 @@ namespace CodeBase.Game.Character
     {
         [SerializeField, Min(0)] private float _speed;
 
-        private Transform _character;
+        private Transform _body;
         private Coroutine _moveCoroutine;
 
         public event UnityAction StartMoving;
@@ -16,10 +16,10 @@ namespace CodeBase.Game.Character
 
         protected virtual float Speed => _speed;
 
-        public void Init(Vector2 startPosition, Transform character)
+        public void Init(Vector2 startPosition, Transform body)
         {
-            _character = character;
-            _character.position = startPosition;
+            _body = body;
+            _body.position = startPosition;
             Stop();
             //StartMoveToNextPointX(startPosition.x);
         }
@@ -32,7 +32,6 @@ namespace CodeBase.Game.Character
 
         public void Stop()
         {
-            print($"{gameObject} stopped {_moveCoroutine}");
             if (_moveCoroutine != null)
                 StopCoroutine(_moveCoroutine);
         }
@@ -41,15 +40,15 @@ namespace CodeBase.Game.Character
         {
             StartMoving?.Invoke();
 
-            var finish = _character.position;
+            var finish = _body.position;
             finish.x = x;
 
             do
             {
-                _character.position = Vector3.MoveTowards(_character.position, finish, Speed * Time.deltaTime);
+                _body.position = Vector3.MoveTowards(_body.position, finish, Speed * Time.deltaTime);
                 yield return null;
             } 
-            while (_character.position != finish);
+            while (_body.position != finish);
 
             EndMoving?.Invoke();
         }

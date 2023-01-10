@@ -21,6 +21,9 @@ namespace CodeBase.Game.Character
         protected override void OnStartMoving() 
             => _animator.SetMoveParameter(true);
 
+        protected override void OnStoptMoving()
+            => _animator.SetMoveParameter(false);
+
         protected override void OnEndMoving()
         {
             _animator.SetMoveParameter(false);
