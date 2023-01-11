@@ -1,18 +1,16 @@
-using CodeBase.UI.Visibility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CodeBase.UI.Menu
 {
-    [RequireComponent(typeof(CanvasGroupController), typeof(MenuMediator), typeof(PressEscBehaviour))]
-    public class MenuBehaviour : MonoBehaviour
+    [RequireComponent(typeof(MenuMediator), typeof(PressEscBehaviour))]
+    public class MenuForm : UIForm
     {
         [Header("Buttons")]
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _optionsButton;
 
-        private CanvasGroupController _visibility;
         private MenuMediator _mediator;
         private PressEscBehaviour _pressEscBehaviour;
 
@@ -30,41 +28,41 @@ namespace CodeBase.UI.Menu
             _pressEscBehaviour.enabled = false;
         }
 
-        private void Awake()
+        public void EnableEsc()
+            => _pressEscBehaviour.enabled = true;
+
+        #region Protected
+        protected override void OnShowed()
+            => ShowMenu();
+
+        protected override void OnAwake()
         {
-            _visibility = GetComponent<CanvasGroupController>();
             _mediator = GetComponent<MenuMediator>();
             _pressEscBehaviour = GetComponent<PressEscBehaviour>();
         }
 
-        private void Start()
-        {
-            _pressEscBehaviour.Init(ShowMenu);
-        }
+        protected override void OnStarted() 
+            => _pressEscBehaviour.Init(ShowMenu);
 
-        private void OnEnable()
+        protected override void Subscribe()
         {
-            _visibility.Showed += ShowMenu;
             _startButton.onClick.AddListener(OnClickStartGame);
             _optionsButton.onClick.AddListener(OnClickOptions);
         }
 
-        private void OnDisable()
+        protected override void Unsubscribe()
         {
-            _visibility.Showed -= ShowMenu;
             _startButton.onClick.RemoveListener(OnClickStartGame);
             _optionsButton.onClick.RemoveListener(OnClickOptions);
         }
+        #endregion Protected
 
-        private void OnClickStartGame()
-        {
-            _mediator.Show(MenuWindow.SelectLVL);
-            _pressEscBehaviour.enabled = true;
-        }
+        private void OnClickStartGame() 
+            => _mediator.Show(MenuWindow.SelectLVL);
 
         private void OnClickOptions()
         {
-            //_mediator.Show(MenuWindow.Options);
+            _mediator.Show(MenuWindow.Options);
             print("OnClickOptions");
         }
     }

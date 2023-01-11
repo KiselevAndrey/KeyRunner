@@ -21,7 +21,6 @@ namespace CodeBase.Game.Character
             _body = body;
             _body.position = startPosition;
             Stop();
-            //StartMoveToNextPointX(startPosition.x);
         }
 
         public void StartMoveToNextPointX(float x)

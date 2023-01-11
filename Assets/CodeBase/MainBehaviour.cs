@@ -9,7 +9,7 @@ namespace CodeBase
     {
         [SerializeField] private MainMediator _mediator;
         [SerializeField] private GameBehaviour _game;
-        [SerializeField] private MenuBehaviour _menu;
+        [SerializeField] private MenuForm _menu;
 
         private void Start()
         {

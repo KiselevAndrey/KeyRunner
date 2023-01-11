@@ -1,15 +1,12 @@
 using CodeBase.Settings;
 using CodeBase.Settings.Singleton;
 using CodeBase.UI.Keyboard;
-using CodeBase.UI.Visibility;
 using CodeBase.Utility;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace CodeBase.UI.Menu
 {
-    [RequireComponent(typeof(CanvasGroupController))]
-    public class SelectLvlBehaviour : MonoBehaviour
+    public class SelectLvlForm : MenuSubform
     {
         [Header("SO")]
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
@@ -21,18 +18,15 @@ namespace CodeBase.UI.Menu
 
         [Header("Other")]
         [SerializeField] private KeyboardBehaviour _keyboard;
-        [SerializeField] private MenuBehaviour _menu;
-        [SerializeField] private Button _escButton;
 
-        private CanvasGroupController _visibility;
-
-        #region Unity Lifecycle
-        private void Awake()
+        #region Protected
+        protected override void OnShowing()
         {
-            _visibility = GetComponent<CanvasGroupController>();
+            base.OnShowing();
+            _keyboard.DeselectAllDisplays();
         }
 
-        private void Start()
+        protected override void OnStarted()
         {
             for (int i = 0; i <= _levelsOfKeysSO.MaxLevel; i++)
             {
@@ -43,19 +37,7 @@ namespace CodeBase.UI.Menu
 
             _keyboard.InitDisplays(_languageKeyMapSO);
         }
-
-        private void OnEnable()
-        {
-            _visibility.Showing += OnShowing;
-            _escButton.onClick.AddListener(OnEscButtonClick);
-        }
-
-        private void OnDisable()
-        {
-            _visibility.Showing -= OnShowing;
-            _escButton.onClick.RemoveListener(OnEscButtonClick);
-        }
-        #endregion Unity Lifecycle
+        #endregion Protected
 
         #region Private
         private void ShowLvlKeys(int level)
@@ -82,17 +64,7 @@ namespace CodeBase.UI.Menu
         {
             level--;
             PlayerInfoSO.SelectedLVL = level;
-            _menu.StartingGame();
-        }
-
-        private void OnShowing()
-        {
-            _keyboard.DeselectAllDisplays();
-        }
-
-        private void OnEscButtonClick()
-        {
-            _menu.ShowMenu();
+            Menu.StartingGame();
         }
         #endregion Private
     }
