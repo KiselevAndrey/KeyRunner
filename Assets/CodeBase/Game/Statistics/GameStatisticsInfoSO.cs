@@ -8,9 +8,11 @@ namespace CodeBase.Game.Statistics
         [SerializeField] private int _pressedKeyCount;
         [SerializeField] private int _wrongKeyCount;
         [SerializeField] private float _typingDuration;
+
         [field: SerializeField] public float GameDuration { get; private set; }
         [field: SerializeField] public float PressedKeysPerMin { get; private set; }
         [field: SerializeField] public float MistakesPercent { get; private set; }
+        [field: SerializeField] public float Score { get; private set; }
 
         private float _startGameTime;
 
@@ -22,6 +24,7 @@ namespace CodeBase.Game.Statistics
             _typingDuration = 0;
             PressedKeysPerMin = 0;
             MistakesPercent = 0;
+            Score = 0;
         }
 
         public void EndRound(int pressedCount, int wrongCount, float roundTime)
@@ -31,11 +34,12 @@ namespace CodeBase.Game.Statistics
             _typingDuration += roundTime;
         }
 
-        public void EndGame()
+        public void EndGame(float score)
         {
             GameDuration = Time.time - _startGameTime;
             PressedKeysPerMin = _pressedKeyCount / _typingDuration * 60;
             MistakesPercent = _wrongKeyCount * 100f / _pressedKeyCount;
+            Score = score;
         }
     }
 }

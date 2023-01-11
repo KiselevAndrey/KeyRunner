@@ -12,12 +12,14 @@ namespace CodeBase.UI.Game
         [SerializeField] private TMP_Text _gameTimeText;
         [SerializeField] private TMP_Text _speedText;
         [SerializeField] private TMP_Text _mistakeText;
+        [SerializeField] private TMP_Text _scoreText;
 
         public override void Show(UnityAction action)
         {
             _gameTimeText.text = $"{(int)_gameStatisticsInfoSO.GameDuration / 60} : {(int)(_gameStatisticsInfoSO.GameDuration % 60)}";
             _speedText.text = ((int)_gameStatisticsInfoSO.PressedKeysPerMin).ToString();
             _mistakeText.text = ((int)_gameStatisticsInfoSO.MistakesPercent).ToString();
+            _scoreText.text = _gameStatisticsInfoSO.Score.ToString();
 
             base.Show(action);
         }

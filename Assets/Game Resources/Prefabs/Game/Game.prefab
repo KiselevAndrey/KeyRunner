@@ -51,6 +51,7 @@ MonoBehaviour:
   _newLetterDisplay: {fileID: 0}
   _escButton: {fileID: 0}
   _escPopupWindow: {fileID: 0}
+  _statisticPopupWindow: {fileID: 0}
   _gameLetter: {fileID: 93478952872381867}
   _trialGameLetter: {fileID: 1788544642611840288}
   _character: {fileID: 3051784997023534863}
@@ -82,7 +83,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec1fb0dbe53f84409a15941af32cfa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxCorrectlyPressInRow: 8
   _statisticsSO: {fileID: 11400000, guid: 324c37836ce68d443b2b696e027ba157, type: 2}
+  _scoreText: {fileID: 0}
+  _pressedCorrectlyInRow: 0
+  _inRowBonus: 0
 --- !u!1 &93478952872381865
 GameObject:
   m_ObjectHideFlags: 0

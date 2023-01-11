@@ -105,13 +105,12 @@ namespace CodeBase.Game.Behaviours
                 _usedGameLetter.NextLetter();
                 _character.NextPositionX(_usedGameLetter.LastKeyPositionX);
 
+                _statistics.CorrectKey(_isTrial);
+                
                 if (_isTrial)
                     _newLetterDisplay.ChangeRemainsCount(_usedGameLetter.LettersLeft);
                 else
-                {
-                    _statistics.CorrectKey();
                     _enemy.NextPositionX(_character.Position.x);
-                }
 
                 if (_usedGameLetter.LettersLeft > 0)
                     _keyboard.HighlightDisplay(_usedGameLetter.LastKey);
@@ -139,9 +138,11 @@ namespace CodeBase.Game.Behaviours
             if (_isTrial)
                 return;
 
+            _keyboard.enabled = false;
             _character.StopMoving();
             _enemy.StopMoving();
             _statistics.EndRound();
+            _statistics.ResetBonus();
         }
 
         private void OnHuntingEnded(int damage)
@@ -152,6 +153,7 @@ namespace CodeBase.Game.Behaviours
             {
                 PlayerInfoSO.CaughtTimes++;
                 InitLevel();
+                _keyboard.enabled = true;
             }
         }
 

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a269c861b49cf814c9f7e30af05d47c7, type: 3}
   m_Name: PlayerInfoSO
   m_EditorClassIdentifier: 
-  <SelectedLVL>k__BackingField: 0
-  <Language>k__BackingField: 0
-  <Keyboard>k__BackingField: 0
+  _selectedLVL: -1
+  _roundsEnded: 0
+  _caughtTimes: 0
+  _language: 0
+  _keyboard: 0
