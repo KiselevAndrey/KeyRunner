@@ -7,7 +7,7 @@ using UnityEngine;
 namespace CodeBase.Game.Letter
 {
     [RequireComponent(typeof(LocalPool))]
-    public class GameLettersBehaviour : BaseGameLettersBehaviour
+    public class GameLettersService : BaseGameLettersService
     {
         private readonly int _maxLettersCount = 34;
         private readonly int _maxCountSameLettersSequentially = 2;
@@ -62,16 +62,12 @@ namespace CodeBase.Game.Letter
             _xPos += SpaceToNextLetter;
         }
 
-        public void Hide()
-        {
-            _pool.DespawnAll();
-        }
+        public void Hide() 
+            => _pool.DespawnAll();
         #endregion Public
 
-        private void Awake()
-        {
-            _pool = GetComponent<LocalPool>();
-        }
+        private void Awake() 
+            => _pool = GetComponent<LocalPool>();
 
         private void RespawnLetters()
         {

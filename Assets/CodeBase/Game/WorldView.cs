@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace CodeBase.Game.Behaviours
+namespace CodeBase.Game
 {
-    public class WorldBehaviour : MonoBehaviour
+    public class WorldView : MonoBehaviour
     {
         [SerializeField] private GameObject _world;
 

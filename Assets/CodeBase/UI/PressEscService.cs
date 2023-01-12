@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.UI
 {
-    public class PressEscBehaviour : MonoBehaviour
+    public class PressEscService : MonoBehaviour
     {
         private Action EscAction;
 

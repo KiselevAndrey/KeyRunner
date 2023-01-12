@@ -16,15 +16,21 @@ namespace CodeBase.Game.Statistics
 
         private float _startGameTime;
 
+        public void ResetInfo()
+        {
+            GameDuration = 0;
+            PressedKeysPerMin = 0;
+            MistakesPercent = 0;
+            Score = 0;
+        }
+
         public void StartNewGame()
         {
             _startGameTime = Time.time;
             _pressedKeyCount = 0;
             _wrongKeyCount = 0;
             _typingDuration = 0;
-            PressedKeysPerMin = 0;
-            MistakesPercent = 0;
-            Score = 0;
+            ResetInfo();
         }
 
         public void EndRound(int pressedCount, int wrongCount, float roundTime)

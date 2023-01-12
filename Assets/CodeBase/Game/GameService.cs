@@ -12,28 +12,28 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace CodeBase.Game.Behaviours
+namespace CodeBase.Game
 {
-    [RequireComponent(typeof(PressEscBehaviour), typeof(StatisticsBehaviour))]
-    public class GameBehaviour : MonoBehaviour
+    [RequireComponent(typeof(PressEscService), typeof(StatisticsService))]
+    public class GameService : MonoBehaviour
     {
         private readonly int _trialRound = -1;
         private readonly int _maxRoundsInLVL = 3;
 
         [Header("UI")]
-        [SerializeField] private KeyboardBehaviour _keyboard;
-        [SerializeField] private LifeBehaviour _life;
-        [SerializeField] private NewLetterDisplayBehaviour _newLetterDisplay;
+        [SerializeField] private KeyboardService _keyboard;
+        [SerializeField] private LifeService _life;
+        [SerializeField] private NewLetterDisplay _newLetterDisplay;
         [SerializeField] private Button _escButton;
         [SerializeField] private PopupWindowWithTwoButtonsAndText _escPopupWindow;
         [SerializeField] private StatisticsPopupWindow _statisticPopupWindow;
 
         [Header("Behaviours")]
-        [SerializeField] private GameLettersBehaviour _gameLetter;
-        [SerializeField] private TrialGameLettersBehaviour _trialGameLetter;
-        [SerializeField] private CharacterBehaviour _character;
-        [SerializeField] private EnemyBehaviour _enemy;
-        [SerializeField] private WorldBehaviour _world;
+        [SerializeField] private GameLettersService _gameLetter;
+        [SerializeField] private TrialGameLettersService _trialGameLetter;
+        [SerializeField] private CharacterStateSwitch _character;
+        [SerializeField] private EnemyStateSwitch _enemy;
+        [SerializeField] private WorldView _world;
 
         [Header("SO")]
         [SerializeField] private LevelsOfKeysSO _levelsOfKeysSO;
@@ -43,16 +43,14 @@ namespace CodeBase.Game.Behaviours
         private bool _isPauseNow;
         private bool _isTrial;
 
-        private StatisticsBehaviour _statistics;
-        private PressEscBehaviour _pressEscBehaviour;
-        private IGameLettersBehaviour _usedGameLetter;
+        private StatisticsService _statistics;
+        private PressEscService _pressEscBehaviour;
+        private IGameLettersService _usedGameLetter;
 
         public event UnityAction EndGame;
 
-        public void ChangeKeyboardLayout()
-        {
-            _keyboard.InitDisplays(_languageKeyMapSO);
-        }
+        public void ChangeKeyboardLayout() 
+            => _keyboard.InitDisplays(_languageKeyMapSO);
 
         public void StartNewGame()
         {
@@ -70,8 +68,8 @@ namespace CodeBase.Game.Behaviours
         #region Unity Lifecycle
         private void Awake()
         {
-            _statistics = GetComponent<StatisticsBehaviour>();
-            _pressEscBehaviour = GetComponent<PressEscBehaviour>();
+            _statistics = GetComponent<StatisticsService>();
+            _pressEscBehaviour = GetComponent<PressEscService>();
             _pressEscBehaviour.Init(OnEscButtonPressed);
             _pressEscBehaviour.enabled = false;
             _world.Hide();
@@ -186,7 +184,6 @@ namespace CodeBase.Game.Behaviours
         {
             int level = GiveLVL(PlayerInfoSO.SelectedLVL);
 
-            // check is over last LVL
             if(level > _levelsOfKeysSO.MaxLevel)
             {
                 GameEnded();
@@ -219,7 +216,6 @@ namespace CodeBase.Game.Behaviours
 
         private int GiveLVL(int currentLVL)
         {
-            // check is new lvl
             if (_round >= _maxRoundsInLVL)
             {
                 currentLVL++;

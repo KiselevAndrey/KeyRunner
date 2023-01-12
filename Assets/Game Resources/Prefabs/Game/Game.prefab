@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5816243835795391926}
   - component: {fileID: 2296932709544304192}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Game Service
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,8 +86,6 @@ MonoBehaviour:
   _maxCorrectlyPressInRow: 8
   _statisticsSO: {fileID: 11400000, guid: 324c37836ce68d443b2b696e027ba157, type: 2}
   _scoreText: {fileID: 0}
-  _pressedCorrectlyInRow: 0
-  _inRowBonus: 0
 --- !u!1 &93478952872381865
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +99,7 @@ GameObject:
   - component: {fileID: 93478952872381867}
   - component: {fileID: 1788544642611840288}
   m_Layer: 0
-  m_Name: Letter Manager
+  m_Name: Letter Service
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

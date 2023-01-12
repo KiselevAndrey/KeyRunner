@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Game.Letter
 {
-    public abstract class BaseGameLettersBehaviour : MonoBehaviour, IGameLettersBehaviour
+    public abstract class BaseGameLettersService : MonoBehaviour, IGameLettersService
     {
         protected List<SimpleLetterInfo> GeneratedLevelLetters = new();
 

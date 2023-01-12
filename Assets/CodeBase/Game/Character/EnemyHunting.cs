@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.Game.Character
 {
-    public class EnemyHuntingBehaviour : MonoBehaviour
+    public class EnemyHunting : MonoBehaviour
     {
         private Action _endHuntingAction;
 

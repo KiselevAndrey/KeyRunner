@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace CodeBase.UI.Game
 {
-    public class LifeBehaviour : MonoBehaviour
+    public class LifeService : MonoBehaviour
     {
         [SerializeField] private Image _lifeFiller;
 

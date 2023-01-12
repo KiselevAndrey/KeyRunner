@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CodeBase.UI.Game
 {
     [RequireComponent(typeof(CanvasGroupController))]
-    public class NewLetterDisplayBehaviour : MonoBehaviour
+    public class NewLetterDisplay : MonoBehaviour
     {
         [SerializeField] private SimpleLetterDisplay _firstLetter;
         [SerializeField] private SimpleLetterDisplay _secondLetter;

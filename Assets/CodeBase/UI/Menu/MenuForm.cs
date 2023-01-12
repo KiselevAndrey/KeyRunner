@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace CodeBase.UI.Menu
 {
-    [RequireComponent(typeof(MenuMediator), typeof(PressEscBehaviour))]
+    [RequireComponent(typeof(MenuMediator), typeof(PressEscService))]
     public class MenuForm : UIForm
     {
         [Header("Buttons")]
@@ -12,7 +12,7 @@ namespace CodeBase.UI.Menu
         [SerializeField] private Button _optionsButton;
 
         private MenuMediator _mediator;
-        private PressEscBehaviour _pressEscBehaviour;
+        private PressEscService _pressEscBehaviour;
 
         public event UnityAction StartGame;
 
@@ -38,7 +38,7 @@ namespace CodeBase.UI.Menu
         protected override void OnAwake()
         {
             _mediator = GetComponent<MenuMediator>();
-            _pressEscBehaviour = GetComponent<PressEscBehaviour>();
+            _pressEscBehaviour = GetComponent<PressEscService>();
         }
 
         protected override void OnStarted() 

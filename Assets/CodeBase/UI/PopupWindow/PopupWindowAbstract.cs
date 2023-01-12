@@ -19,7 +19,6 @@ namespace CodeBase.UI.PopupWindow
         protected virtual void OnShowing() { }
         protected virtual void OnShowed() { }
 
-        #region Unity Lifecycle
         private void Awake()
         {
             _visibility = GetComponent<CanvasGroupController>();
@@ -38,6 +37,5 @@ namespace CodeBase.UI.PopupWindow
             _visibility.Showed -= OnShowed;
             Unsubscribe();
         }
-        #endregion Unity Lifecycle
     }
 }

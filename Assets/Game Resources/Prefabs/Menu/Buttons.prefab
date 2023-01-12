@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ba902f92935da4e94634be32197679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isShowOnStart: 0
+  _isShowOnStart: 1
   _duration: 0.5
   _hideFactor: 1
 --- !u!1 &2406321541653095308

@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace CodeBase.Game.Character
 {
     [RequireComponent(typeof(EnemyMover))]
-    public class EnemyBehaviour : BaseBehaviour
+    public class EnemyStateSwitch : BaseStateSwith
     {
         [SerializeField, Range(1, 4)] private float _startDistance = 2f;
         [SerializeField, Range(0, 1)] private float _catchDistance = .6f;
@@ -12,7 +12,7 @@ namespace CodeBase.Game.Character
         [SerializeField, Min(0)] private int _damage = 10;
 
         private Transform _target;
-        private EnemyHuntingBehaviour _huntingBehaviour;
+        private EnemyHunting _huntingBehaviour;
 
         public event UnityAction CharacterCaught;
         public event UnityAction<int> HuntingEnding;
@@ -32,7 +32,7 @@ namespace CodeBase.Game.Character
         protected override void OnAwake()
         {
             Mover = GetComponent<EnemyMover>();
-            _huntingBehaviour = GetComponent<EnemyHuntingBehaviour>();
+            _huntingBehaviour = GetComponent<EnemyHunting>();
         }
 
         protected override void OnEndMoving()

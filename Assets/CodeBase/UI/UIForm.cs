@@ -15,7 +15,6 @@ namespace CodeBase.UI
         protected virtual void Subscribe() { }
         protected virtual void Unsubscribe() { }
 
-        #region Unity Lifecycle
         private void Awake()
         {
             _formVisibility = GetComponent<CanvasGroupController>();
@@ -39,6 +38,5 @@ namespace CodeBase.UI
             _formVisibility.Showing -= OnShowing;
             Unsubscribe();
         }
-        #endregion Unity Lifecycle
     }
 }

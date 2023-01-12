@@ -3,10 +3,10 @@ using UnityEngine.Events;
 
 namespace CodeBase.Game.Character
 {
-    [RequireComponent(typeof(CharacterMover), typeof(CharacterAnimatorBehaviour))]
-    public class CharacterBehaviour : BaseBehaviour
+    [RequireComponent(typeof(CharacterMover), typeof(CharacterAnimator))]
+    public class CharacterStateSwitch : BaseStateSwith
     {
-        private CharacterAnimatorBehaviour _animator;
+        private CharacterAnimator _animator;
 
         public Vector3 Position => Body.position;
 
@@ -15,7 +15,7 @@ namespace CodeBase.Game.Character
         protected override void OnAwake()
         {
             Mover = GetComponent<CharacterMover>();
-            _animator = GetComponent<CharacterAnimatorBehaviour>();
+            _animator = GetComponent<CharacterAnimator>();
         }
 
         protected override void OnStartMoving() 

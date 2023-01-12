@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CodeBase.Game.Character
 {
-    public class CharacterAnimatorBehaviour : MonoBehaviour
+    public class CharacterAnimator : MonoBehaviour
     {
         private readonly string _moveParameterName = "IsMoving";
 

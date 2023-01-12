@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CodeBase.Game.Letter
 {
-    public class TrialGameLettersBehaviour : BaseGameLettersBehaviour
+    public class TrialGameLettersService : BaseGameLettersService
     {
         // 1 more, because it is necessary to start the character
         private readonly int _maxLettersCount = 11;

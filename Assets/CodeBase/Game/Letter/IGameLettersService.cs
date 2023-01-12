@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Game.Letter
 {
-    public interface IGameLettersBehaviour
+    public interface IGameLettersService
     {
         public float LastKeyPositionX { get; }
         public int LettersLeft { get; }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CodeBase.Game.Character
 {
-    public abstract class BaseBehaviour : MonoBehaviour
+    public abstract class BaseStateSwith : MonoBehaviour
     {
         [field: SerializeField] public Transform Body { get; private set; }
 

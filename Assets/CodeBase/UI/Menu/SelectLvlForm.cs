@@ -17,9 +17,8 @@ namespace CodeBase.UI.Menu
         [SerializeField] private LocalPool _lvlPool;
 
         [Header("Other")]
-        [SerializeField] private KeyboardBehaviour _keyboard;
+        [SerializeField] private KeyboardService _keyboard;
 
-        #region Protected
         protected override void OnShowing()
         {
             base.OnShowing();
@@ -31,15 +30,12 @@ namespace CodeBase.UI.Menu
             for (int i = 0; i <= _levelsOfKeysSO.MaxLevel; i++)
             {
                 var lvlButton = _lvlPool.Spawn(_selectLvlButtonPrefab);
-                //var lvlInfo = _levelsOfKeysSO.Levels[i];
                 lvlButton.Init(i + 1, ShowLvlKeys, OnLevelSelect);
             }
 
             _keyboard.InitDisplays(_languageKeyMapSO);
         }
-        #endregion Protected
 
-        #region Private
         private void ShowLvlKeys(int level)
         {
             level--;
@@ -66,6 +62,5 @@ namespace CodeBase.UI.Menu
             PlayerInfoSO.SelectedLVL = level;
             Menu.StartingGame();
         }
-        #endregion Private
     }
 }

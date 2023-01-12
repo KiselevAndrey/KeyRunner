@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Game.Statistics
 {
-    public class StatisticsBehaviour : MonoBehaviour
+    public class StatisticsService : MonoBehaviour
     {
         [SerializeField, Range(1, 20)] private int _maxCorrectlyPressInRow = 5;
         [SerializeField] private GameStatisticsInfoSO _statisticsSO;

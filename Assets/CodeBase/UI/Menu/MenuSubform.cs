@@ -17,9 +17,7 @@ namespace CodeBase.UI.Menu
         protected override void Unsubscribe()
             => _escButton.onClick.RemoveListener(OnEscButtonClick);
 
-        private void OnEscButtonClick()
-        {
-            Menu.ShowMenu();
-        }
+        private void OnEscButtonClick() 
+            => Menu.ShowMenu();
     }
 }

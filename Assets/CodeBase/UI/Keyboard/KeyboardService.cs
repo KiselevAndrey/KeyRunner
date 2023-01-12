@@ -7,7 +7,7 @@ using Keys = CodeBase.Utility.KeyboardInputUtility;
 
 namespace CodeBase.UI.Keyboard
 {
-    public class KeyboardBehaviour : MonoBehaviour
+    public class KeyboardService : MonoBehaviour
     {
         [SerializeField] private LanguageKeyMapSO _keyMapSO;
 
