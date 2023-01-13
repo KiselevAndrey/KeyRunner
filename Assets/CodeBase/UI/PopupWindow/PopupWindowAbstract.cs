@@ -7,13 +7,19 @@ namespace CodeBase.UI.PopupWindow
     public abstract class PopupWindowAbstract : MonoBehaviour
     {
         private CanvasGroupController _visibility;
-        
-        public void Hide() 
-            => _visibility.HideSmooth();
+
+        public void Hide()
+        {
+            enabled = false;
+            _visibility.HideSmooth();
+        }
 
         protected void Show()
-            => _visibility.ShowSmooth();
-        
+        {
+            enabled = true;
+            _visibility.ShowSmooth();
+        }
+
         protected virtual void Subscribe() { }
         protected virtual void Unsubscribe() { }
         protected virtual void OnShowing() { }
@@ -22,6 +28,7 @@ namespace CodeBase.UI.PopupWindow
         private void Awake()
         {
             _visibility = GetComponent<CanvasGroupController>();
+            enabled = false;
         }
 
         private void OnEnable()

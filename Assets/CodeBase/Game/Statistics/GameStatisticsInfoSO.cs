@@ -1,3 +1,5 @@
+using CodeBase.DataPersistence;
+using System;
 using UnityEngine;
 
 namespace CodeBase.Game.Statistics
@@ -13,6 +15,7 @@ namespace CodeBase.Game.Statistics
         [field: SerializeField] public float PressedKeysPerMin { get; private set; }
         [field: SerializeField] public float MistakesPercent { get; private set; }
         [field: SerializeField] public float Score { get; private set; }
+        [field: SerializeField] public string PlayerName { get; set; }
 
         private float _startGameTime;
 
@@ -43,9 +46,20 @@ namespace CodeBase.Game.Statistics
         public void EndGame(float score)
         {
             GameDuration = Time.time - _startGameTime;
-            PressedKeysPerMin = _pressedKeyCount / _typingDuration * 60;
-            MistakesPercent = _wrongKeyCount * 100f / _pressedKeyCount;
+            PressedKeysPerMin = (float)Math.Round(_pressedKeyCount / _typingDuration * 60, 1);
+            MistakesPercent = (float)Math.Round(_wrongKeyCount * 100f / _pressedKeyCount, 2);
             Score = score;
+        }
+
+        public LeaderData GetLeaderData()
+        {
+            return new LeaderData(
+                PlayerName,
+                Score,
+                PressedKeysPerMin,
+                MistakesPercent,
+                DateTime.Today.ToString("d")
+                );
         }
     }
 }

@@ -1,10 +1,13 @@
 using UnityEngine;
 
-namespace CodeBase.Settings.Singleton
+namespace CodeBase.Settings
 {
     public enum Language { Ru, Eng }
     public enum KeyboardLayout { Ru, Eng }
+}
 
+namespace CodeBase.Settings.Singleton
+{
     [CreateAssetMenu(fileName = nameof(PlayerInfoSO), menuName = nameof(CodeBase) + "/" + nameof(Singleton) +"/" + nameof(PlayerInfoSO))]
     public class PlayerInfoSO : SingletonScriptableObject<PlayerInfoSO>
     {

@@ -17,8 +17,8 @@ namespace CodeBase.UI.Game
         public override void Show(UnityAction action)
         {
             _gameTimeText.text = $"{(int)_gameStatisticsInfoSO.GameDuration / 60} : {(int)(_gameStatisticsInfoSO.GameDuration % 60)}";
-            _speedText.text = ((int)_gameStatisticsInfoSO.PressedKeysPerMin).ToString();
-            _mistakeText.text = ((int)_gameStatisticsInfoSO.MistakesPercent).ToString();
+            _speedText.text = _gameStatisticsInfoSO.PressedKeysPerMin.ToString();
+            _mistakeText.text = _gameStatisticsInfoSO.MistakesPercent.ToString();
             _scoreText.text = _gameStatisticsInfoSO.Score.ToString();
 
             base.Show(action);

@@ -28,16 +28,16 @@ namespace CodeBase.UI.PopupWindow
             _okButton.onClick.RemoveListener(OnOkButtonClick);
         }
 
+        protected virtual void OnOkButtonClick()
+        {
+            Hide();
+            _okAction?.Invoke();
+        }
+
         private void Update()
         {
             if(Input.GetKeyUp(KeyCode.Return))
                 OnOkButtonClick();
-        }
-
-        private void OnOkButtonClick()
-        {
-            Hide();
-            _okAction?.Invoke();
         }
     }
 }

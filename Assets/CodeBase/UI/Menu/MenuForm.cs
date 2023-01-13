@@ -10,15 +10,19 @@ namespace CodeBase.UI.Menu
         [Header("Buttons")]
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _optionsButton;
+        [SerializeField] private Button _leaderboardButton;
 
         private MenuMediator _mediator;
         private PressEscService _pressEscBehaviour;
+
+        private bool _isGameStarted;
 
         public event UnityAction StartGame;
 
         public void StartingGame()
         {
             ShowMenu();
+            _isGameStarted = true;
             StartGame?.Invoke();
         }
 
@@ -33,7 +37,12 @@ namespace CodeBase.UI.Menu
 
         #region Protected
         protected override void OnShowed()
-            => ShowMenu();
+        {
+            if (_isGameStarted)
+                ShowResult();
+            else
+                ShowMenu();
+        }
 
         protected override void OnAwake()
         {
@@ -48,12 +57,14 @@ namespace CodeBase.UI.Menu
         {
             _startButton.onClick.AddListener(OnClickStartGame);
             _optionsButton.onClick.AddListener(OnClickOptions);
+            _leaderboardButton.onClick.AddListener(OnClickLeaderboard);
         }
 
         protected override void Unsubscribe()
         {
             _startButton.onClick.RemoveListener(OnClickStartGame);
             _optionsButton.onClick.RemoveListener(OnClickOptions);
+            _leaderboardButton.onClick.RemoveListener(OnClickLeaderboard);
         }
         #endregion Protected
 
@@ -64,6 +75,15 @@ namespace CodeBase.UI.Menu
         {
             _mediator.Show(MenuWindow.Options);
             print("OnClickOptions");
+        }
+
+        private void OnClickLeaderboard()
+            => _mediator.Show(MenuWindow.Leaderboard);
+
+        private void ShowResult()
+        {
+            _isGameStarted = false;
+            _mediator.Show(MenuWindow.Leaderboard);
         }
     }
 }

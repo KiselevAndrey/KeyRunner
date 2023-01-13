@@ -28,7 +28,7 @@ namespace CodeBase.Game
         [SerializeField] private PopupWindowWithTwoButtonsAndText _escPopupWindow;
         [SerializeField] private StatisticsPopupWindow _statisticPopupWindow;
 
-        [Header("Behaviours")]
+        [Header("Services")]
         [SerializeField] private GameLettersService _gameLetter;
         [SerializeField] private TrialGameLettersService _trialGameLetter;
         [SerializeField] private CharacterStateSwitch _character;

@@ -3,13 +3,14 @@ using UnityEngine;
 
 namespace CodeBase.UI.Menu
 {
-    public enum MenuWindow { Buttons, SelectLVL, Options }
+    public enum MenuWindow { Buttons, SelectLVL, Options, Leaderboard }
 
     public class MenuMediator : CanvasMediator
     {
         [SerializeField] private CanvasGroupController _buttons;
         [SerializeField] private CanvasGroupController _selectLVL;
         [SerializeField] private CanvasGroupController _options;
+        [SerializeField] private CanvasGroupController _leaderboard;
 
         private MenuWindow _selected;
 
@@ -35,6 +36,9 @@ namespace CodeBase.UI.Menu
                     break;
                 case MenuWindow.Options:
                     ShowHide(_options, isShow);
+                    break;
+                case MenuWindow.Leaderboard:
+                    ShowHide(_leaderboard, isShow);
                     break;
                 default:
                     break;
