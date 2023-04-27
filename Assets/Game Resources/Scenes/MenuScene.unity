@@ -339,6 +339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 902733294}
+  - component: {fileID: 902733296}
   - component: {fileID: 902733293}
   - component: {fileID: 902733295}
   m_Layer: 0
@@ -396,6 +397,19 @@ MonoBehaviour:
     Language: 0
     Keyboard: 0
     Leaders: []
+--- !u!114 &902733296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902733292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2c1e6bc7fb42d439062d3415e043ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _menuMediator: {fileID: 8620037883647890784}
 --- !u!1 &928477070
 GameObject:
   m_ObjectHideFlags: 0
@@ -4845,3 +4859,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3760f9275292d254f9ebec35d9267d2b, type: 3}
+--- !u!114 &8620037883647890784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8620037883967514605, guid: 3760f9275292d254f9ebec35d9267d2b, type: 3}
+  m_PrefabInstance: {fileID: 8620037883647890783}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1acdcc409a79bb43a84d8dc2e59004e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

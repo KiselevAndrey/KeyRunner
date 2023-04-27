@@ -28,7 +28,7 @@ namespace CodeBase.UI.Menu
 
         public void ShowMenu()
         {
-            _mediator.Show(MenuWindow.Buttons);
+            //_mediator.Show(MenuWindow.Buttons);
             _pressEscBehaviour.enabled = false;
         }
 
@@ -68,22 +68,26 @@ namespace CodeBase.UI.Menu
         }
         #endregion Protected
 
-        private void OnClickStartGame() 
-            => _mediator.Show(MenuWindow.SelectLVL);
+        private void OnClickStartGame()
+        {
+            //_mediator.Show(MenuWindow.SelectLVL);
+        }
 
         private void OnClickOptions()
         {
-            _mediator.Show(MenuWindow.Options);
+            //_mediator.Show(MenuWindow.Options);
             print("OnClickOptions");
         }
 
         private void OnClickLeaderboard()
-            => _mediator.Show(MenuWindow.Leaderboard);
+        {
+            //_mediator.Show(MenuWindow.Leaderboard);
+        }
 
         private void ShowResult()
         {
             _isGameStarted = false;
-            _mediator.Show(MenuWindow.Leaderboard);
+            //_mediator.Show(MenuWindow.Leaderboard);
         }
     }
 }

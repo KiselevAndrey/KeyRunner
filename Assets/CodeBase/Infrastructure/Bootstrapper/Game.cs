@@ -2,7 +2,7 @@
 using CodeBase.Infrastructure.State.Game;
 using CodeBase.UI.Logic;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Bootstrapper
 {
     public class Game
     {
