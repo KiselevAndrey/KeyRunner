@@ -3,13 +3,13 @@ using CodeBase.UI.Menu;
 
 namespace CodeBase.Infrastructure.State.Menu
 {
-    public class SelectLevelState : IState
+    public class OptionsState : IState
     {
         private MenuStateMachine _menuStateMachine;
         private MenuMediator _menuMediator;
         private PressEscService _escService;
 
-        public SelectLevelState(MenuStateMachine menuStateMachine, MenuMediator menuMediator, PressEscService escService)
+        public OptionsState(MenuStateMachine menuStateMachine, MenuMediator menuMediator, PressEscService escService)
         {
             _menuStateMachine = menuStateMachine;
             _menuMediator = menuMediator;
@@ -18,7 +18,7 @@ namespace CodeBase.Infrastructure.State.Menu
 
         public void Enter()
         {
-            _menuMediator.Show(MenuWindow.SelectLVL);
+            _menuMediator.Show(MenuWindow.Options);
             _escService.enabled = true;
         }
 

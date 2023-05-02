@@ -1,5 +1,3 @@
-using CodeBase.Infrastructure.Service;
-using CodeBase.Infrastructure.State.Menu;
 using CodeBase.UI.Menu;
 using UnityEngine;
 
@@ -7,11 +5,12 @@ namespace CodeBase.Infrastructure.Bootstrapper
 {
     public class MenuBootstrapper : MonoBehaviour
     {
-        [SerializeField] private MenuMediator _menuMediator;
+        [SerializeField] private MenuForm _menuForm;
 
         private void Awake()
         {
-            new MenuStateMachine(_menuMediator, AllServices.Container);
+            var menu = Instantiate(_menuForm, transform);
+            menu.Init();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace CodeBase.Infrastructure.State.Game
 
         private void RegisterAllServices()
         {
-
+            _services.RegisterSingle<GameStateMachine>(_gameStateMachine);
         }
     }
 }

@@ -1,3 +1,5 @@
+using CodeBase.Infrastructure.Service;
+using CodeBase.Infrastructure.State.Menu;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -5,19 +7,26 @@ using UnityEngine.UI;
 namespace CodeBase.UI.Menu
 {
     [RequireComponent(typeof(MenuMediator), typeof(PressEscService))]
-    public class MenuForm : UIForm
+    public class MenuForm : MonoBehaviour
     {
         [Header("Buttons")]
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _optionsButton;
         [SerializeField] private Button _leaderboardButton;
 
+        private MenuStateMachine _stateMachine;
+        private PressEscService _pressEscService;
         private MenuMediator _mediator;
-        private PressEscService _pressEscBehaviour;
 
         private bool _isGameStarted;
 
         public event UnityAction StartGame;
+
+        public void Init()
+        {
+            _stateMachine = new MenuStateMachine(_mediator, _pressEscService, AllServices.Container);
+            ShowMenu();
+        }
 
         public void StartingGame()
         {
@@ -29,38 +38,39 @@ namespace CodeBase.UI.Menu
         public void ShowMenu()
         {
             //_mediator.Show(MenuWindow.Buttons);
-            _pressEscBehaviour.enabled = false;
+            _stateMachine.Enter<ButtonState>();
+            _pressEscService.enabled = false;
         }
 
         public void EnableEsc()
-            => _pressEscBehaviour.enabled = true;
+            => _pressEscService.enabled = true;
 
         #region Protected
-        protected override void OnShowed()
-        {
-            if (_isGameStarted)
-                ShowResult();
-            else
-                ShowMenu();
-        }
+        //protected override void OnShowed()
+        //{
+        //    if (_isGameStarted)
+        //        ShowResult();
+        //    else
+        //        ShowMenu();
+        //}
 
-        protected override void OnAwake()
+        private void Awake()
         {
             _mediator = GetComponent<MenuMediator>();
-            _pressEscBehaviour = GetComponent<PressEscService>();
+            _pressEscService = GetComponent<PressEscService>();
         }
 
-        protected override void OnStarted() 
-            => _pressEscBehaviour.Init(ShowMenu);
+        private void Start()
+            => _pressEscService.Init(ShowMenu);
 
-        protected override void Subscribe()
+        private void OnEnable()
         {
             _startButton.onClick.AddListener(OnClickStartGame);
             _optionsButton.onClick.AddListener(OnClickOptions);
             _leaderboardButton.onClick.AddListener(OnClickLeaderboard);
         }
 
-        protected override void Unsubscribe()
+        private void OnDisable()
         {
             _startButton.onClick.RemoveListener(OnClickStartGame);
             _optionsButton.onClick.RemoveListener(OnClickOptions);
