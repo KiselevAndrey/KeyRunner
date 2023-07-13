@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.UI.Game
+namespace CodeBase.UI.Gameplay
 {
     public class SimpleLetterDisplay : MonoBehaviour
     {

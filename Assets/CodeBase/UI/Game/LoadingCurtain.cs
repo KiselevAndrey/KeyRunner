@@ -1,7 +1,7 @@
 using CodeBase.UI.Visibility;
 using UnityEngine;
 
-namespace CodeBase.UI.Logic
+namespace CodeBase.UI.Game
 {
     public class LoadingCurtain : MonoBehaviour
     {

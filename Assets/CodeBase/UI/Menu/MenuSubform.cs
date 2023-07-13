@@ -8,9 +8,6 @@ namespace CodeBase.UI.Menu
         [SerializeField] protected MenuForm Menu;
         [SerializeField] private Button _escButton;
 
-        protected override void OnShowing()
-            => Menu.EnableEsc();
-
         protected override void Subscribe()
             => _escButton.onClick.AddListener(OnEscButtonClick);
 

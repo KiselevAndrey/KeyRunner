@@ -1,5 +1,5 @@
 using CodeBase.Infrastructure.Service;
-using CodeBase.UI.Logic;
+using CodeBase.UI.Game;
 using System;
 using System.Collections.Generic;
 
@@ -14,8 +14,9 @@ namespace CodeBase.Infrastructure.State.Game
             States = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, curtain, services),
-                [typeof(LoadProgressState)] = new LoadProgressState(this, sceneLoader),
-                [typeof(MenuState)] = new MenuState(this, curtain)
+                [typeof(LoadProgressState)] = new LoadProgressState(this),
+                [typeof(MenuState)] = new MenuState(this, sceneLoader, curtain),
+                [typeof(GameplayState)] = new GameplayState(this, sceneLoader, curtain)
             };
         }
     }

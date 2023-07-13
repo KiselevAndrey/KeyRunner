@@ -1,5 +1,5 @@
 using CodeBase.Infrastructure.Service;
-using CodeBase.UI.Logic;
+using CodeBase.UI.Game;
 
 namespace CodeBase.Infrastructure.State.Game
 {
@@ -28,7 +28,7 @@ namespace CodeBase.Infrastructure.State.Game
 
         private void RegisterAllServices()
         {
-            _services.RegisterSingle<GameStateMachine>(_gameStateMachine);
+            _services.RegisterSingle(_gameStateMachine);
         }
     }
 }

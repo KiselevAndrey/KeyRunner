@@ -3,7 +3,7 @@ using CodeBase.UI.Visibility;
 using TMPro;
 using UnityEngine;
 
-namespace CodeBase.UI.Game
+namespace CodeBase.UI.Gameplay
 {
     [RequireComponent(typeof(CanvasGroupController))]
     public class NewLetterDisplay : MonoBehaviour

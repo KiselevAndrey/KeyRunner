@@ -43,8 +43,10 @@ namespace CodeBase.DataPersistence
 
             if (Data == null)
             {
-                Data = new();
-                Data.Leaders = new();
+                Data = new()
+                {
+                    Leaders = new()
+                };
 
                 Debug.LogWarning("No data was found.");
             }

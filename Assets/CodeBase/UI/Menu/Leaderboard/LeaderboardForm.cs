@@ -35,20 +35,6 @@ namespace CodeBase.UI.Menu.Leaderboard
 
             _gameStatisticSO.ResetInfo();
         }
-
-        protected override void Subscribe()
-        {
-            base.Subscribe();
-
-            Menu.StartGame += OnGameStarted;
-        }
-
-        protected override void Unsubscribe()
-        {
-            base.Unsubscribe();
-
-            Menu.StartGame -= OnGameStarted;
-        }
         #endregion Protected
 
         #region Private
@@ -95,9 +81,6 @@ namespace CodeBase.UI.Menu.Leaderboard
 
             ShowLeaders();
         }
-
-        private void OnGameStarted()
-            => _needCheckNewResult = true;
         #endregion Private
     }
 }

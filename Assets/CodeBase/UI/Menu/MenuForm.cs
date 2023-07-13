@@ -1,103 +1,56 @@
 using CodeBase.Infrastructure.Service;
+using CodeBase.Infrastructure.State.Game;
 using CodeBase.Infrastructure.State.Menu;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace CodeBase.UI.Menu
 {
     [RequireComponent(typeof(MenuMediator), typeof(PressEscService))]
-    public class MenuForm : MonoBehaviour
+    public class MenuForm : MonoBehaviour, IMenuSwitcher
     {
-        [Header("Buttons")]
-        [SerializeField] private Button _startButton;
-        [SerializeField] private Button _optionsButton;
-        [SerializeField] private Button _leaderboardButton;
+        [SerializeField] private MenuButtonListner _buttonListner;
 
         private MenuStateMachine _stateMachine;
-        private PressEscService _pressEscService;
-        private MenuMediator _mediator;
+        private AllServices Container => AllServices.Container;
 
-        private bool _isGameStarted;
+        public void StartingGame() =>
+            Container.Single<GameStateMachine>().Enter<GameplayState>();
 
-        public event UnityAction StartGame;
-
-        public void Init()
-        {
-            _stateMachine = new MenuStateMachine(_mediator, _pressEscService, AllServices.Container);
-            ShowMenu();
-        }
-
-        public void StartingGame()
-        {
-            ShowMenu();
-            _isGameStarted = true;
-            StartGame?.Invoke();
-        }
-
-        public void ShowMenu()
-        {
-            //_mediator.Show(MenuWindow.Buttons);
+        public void ShowMenu() =>
             _stateMachine.Enter<ButtonState>();
-            _pressEscService.enabled = false;
-        }
 
-        public void EnableEsc()
-            => _pressEscService.enabled = true;
+        public void ShowResult() =>
+            _stateMachine.Enter<LeaderboardState>();
 
-        #region Protected
-        //protected override void OnShowed()
-        //{
-        //    if (_isGameStarted)
-        //        ShowResult();
-        //    else
-        //        ShowMenu();
-        //}
+        #region IMenuSwitcher
+        public void OnClickStartGame() =>
+            _stateMachine.Enter<SelectLevelState>();
 
+        public void OnClickOptions() =>
+            _stateMachine.Enter<OptionsState>();
+
+        public void OnClickLeaderboard() =>
+            _stateMachine.Enter<LeaderboardState>();
+        #endregion IMenuSwitcher
+
+        #region Unity Lifecycle
         private void Awake()
         {
-            _mediator = GetComponent<MenuMediator>();
-            _pressEscService = GetComponent<PressEscService>();
+            var pressEscService = GetComponent<PressEscService>();
+            pressEscService.Init(ShowMenu);
+
+            _buttonListner.Init(this);
+
+            _stateMachine = new MenuStateMachine(GetComponent<MenuMediator>(), pressEscService, Container);
+
+            ShowMenu();
         }
 
-        private void Start()
-            => _pressEscService.Init(ShowMenu);
+        private void OnEnable() =>
+            _buttonListner.OnEnable();
 
-        private void OnEnable()
-        {
-            _startButton.onClick.AddListener(OnClickStartGame);
-            _optionsButton.onClick.AddListener(OnClickOptions);
-            _leaderboardButton.onClick.AddListener(OnClickLeaderboard);
-        }
-
-        private void OnDisable()
-        {
-            _startButton.onClick.RemoveListener(OnClickStartGame);
-            _optionsButton.onClick.RemoveListener(OnClickOptions);
-            _leaderboardButton.onClick.RemoveListener(OnClickLeaderboard);
-        }
-        #endregion Protected
-
-        private void OnClickStartGame()
-        {
-            //_mediator.Show(MenuWindow.SelectLVL);
-        }
-
-        private void OnClickOptions()
-        {
-            //_mediator.Show(MenuWindow.Options);
-            print("OnClickOptions");
-        }
-
-        private void OnClickLeaderboard()
-        {
-            //_mediator.Show(MenuWindow.Leaderboard);
-        }
-
-        private void ShowResult()
-        {
-            _isGameStarted = false;
-            //_mediator.Show(MenuWindow.Leaderboard);
-        }
+        private void OnDisable() =>
+            _buttonListner.OnDisable();
+        #endregion Unity Lifecycle
     }
 }

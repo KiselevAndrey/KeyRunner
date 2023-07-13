@@ -9,8 +9,7 @@ namespace CodeBase.Infrastructure.Bootstrapper
 
         private void Awake()
         {
-            var menu = Instantiate(_menuForm, transform);
-            menu.Init();
+            Instantiate(_menuForm, transform);
         }
     }
 }

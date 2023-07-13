@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.State.Game
 {
-    public class MenuState : IState
+    public class GameplayState : IState
     {
-        private readonly GameStateMachine _gameStateMachine;
+        private GameStateMachine _gameStrateMachine;
         private readonly SceneLoader _sceneLoader;
-        private readonly LoadingCurtain _curtain;
+        private LoadingCurtain _curtain;
 
-        public MenuState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain)
+        public GameplayState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, LoadingCurtain curtain)
         {
-            _gameStateMachine = gameStateMachine;
+            _gameStrateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
         }
@@ -20,15 +20,14 @@ namespace CodeBase.Infrastructure.State.Game
         public void Enter()
         {
             _curtain.Show();
-            _sceneLoader.Load(SceneName.Menu, OnSceneLoaded);
+            _sceneLoader.Load(SceneName.Gameplay, OnSceneLoaded);
         }
 
         public void Exit() { }
 
-
         private void OnSceneLoaded()
         {
-            Debug.Log("OnMenuSceneLoaded");
+            Debug.Log("OnGameplaySceneLoaded");
             _curtain.Hide();
         }
     }

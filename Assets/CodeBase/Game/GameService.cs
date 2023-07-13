@@ -4,7 +4,7 @@ using CodeBase.Game.Statistics;
 using CodeBase.Settings;
 using CodeBase.Settings.Singleton;
 using CodeBase.UI;
-using CodeBase.UI.Game;
+using CodeBase.UI.Gameplay;
 using CodeBase.UI.Keyboard;
 using CodeBase.UI.PopupWindow;
 using System.Collections.Generic;

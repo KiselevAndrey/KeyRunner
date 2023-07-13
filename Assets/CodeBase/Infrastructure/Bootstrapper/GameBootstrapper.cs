@@ -1,5 +1,5 @@
 using CodeBase.Infrastructure.State.Game;
-using CodeBase.UI.Logic;
+using CodeBase.UI.Game;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Bootstrapper

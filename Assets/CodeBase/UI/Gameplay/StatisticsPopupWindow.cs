@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CodeBase.UI.Game
+namespace CodeBase.UI.Gameplay
 {
     public class StatisticsPopupWindow : PopupWindowWithOneButton
     {

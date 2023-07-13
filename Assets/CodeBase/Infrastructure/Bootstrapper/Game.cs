@@ -1,6 +1,6 @@
 ﻿using CodeBase.Infrastructure.Service;
 using CodeBase.Infrastructure.State.Game;
-using CodeBase.UI.Logic;
+using CodeBase.UI.Game;
 
 namespace CodeBase.Infrastructure.Bootstrapper
 {

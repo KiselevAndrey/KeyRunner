@@ -71,9 +71,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806c636a095c5a44f9cf586379ec5415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startButton: {fileID: 8620037884433447849}
-  _optionsButton: {fileID: 4035401178978513606}
-  _leaderboardButton: {fileID: 188592655996849850}
+  _buttonListner:
+    _startButton: {fileID: 8620037884433447849}
+    _optionsButton: {fileID: 4035401178978513606}
+    _leaderboardButton: {fileID: 188592655996849850}
 --- !u!114 &6314056003409926417
 MonoBehaviour:
   m_ObjectHideFlags: 0

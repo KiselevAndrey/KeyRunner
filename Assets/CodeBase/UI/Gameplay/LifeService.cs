@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.UI.Game
+namespace CodeBase.UI.Gameplay
 {
     public class LifeService : MonoBehaviour
     {
