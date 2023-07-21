@@ -1,0 +1,285 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3938f8dec9db898479330de41328f183, type: 3}
+  m_Name: Rus_KeyMap
+  m_EditorClassIdentifier: 
+  <KeyLeters>k__BackingField:
+  - <Key>k__BackingField: 96
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0451"
+      <ShiftLetter>k__BackingField: "\u0401"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 49
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 1
+      <ShiftLetter>k__BackingField: '!'
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 50
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 2
+      <ShiftLetter>k__BackingField: '"'
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 51
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 3
+      <ShiftLetter>k__BackingField: "\u2116"
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 52
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 4
+      <ShiftLetter>k__BackingField: ;
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 53
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 5
+      <ShiftLetter>k__BackingField: '%'
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 54
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 6
+      <ShiftLetter>k__BackingField: ':'
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 55
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 7
+      <ShiftLetter>k__BackingField: '?'
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 56
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 8
+      <ShiftLetter>k__BackingField: '*'
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 57
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 9
+      <ShiftLetter>k__BackingField: (
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 48
+    <Info>k__BackingField:
+      <Letter>k__BackingField: 0
+      <ShiftLetter>k__BackingField: )
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 45
+    <Info>k__BackingField:
+      <Letter>k__BackingField: '-'
+      <ShiftLetter>k__BackingField: _
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 61
+    <Info>k__BackingField:
+      <Letter>k__BackingField: =
+      <ShiftLetter>k__BackingField: +
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 8
+    <Info>k__BackingField:
+      <Letter>k__BackingField: BS
+      <ShiftLetter>k__BackingField: 
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 9
+    <Info>k__BackingField:
+      <Letter>k__BackingField: TAB
+      <ShiftLetter>k__BackingField: 
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 113
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0439"
+      <ShiftLetter>k__BackingField: "\u0419"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 119
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0446"
+      <ShiftLetter>k__BackingField: "\u0426"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 101
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0443"
+      <ShiftLetter>k__BackingField: "\u0423"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 114
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u043A"
+      <ShiftLetter>k__BackingField: "\u041A"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 116
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0435"
+      <ShiftLetter>k__BackingField: "\u0415"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 121
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u043D"
+      <ShiftLetter>k__BackingField: "\u041D"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 117
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0433"
+      <ShiftLetter>k__BackingField: "\u0413"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 105
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0448"
+      <ShiftLetter>k__BackingField: "\u0428"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 111
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0449"
+      <ShiftLetter>k__BackingField: "\u0429"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 112
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0437"
+      <ShiftLetter>k__BackingField: "\u0417"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 91
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0445"
+      <ShiftLetter>k__BackingField: "\u0425"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 93
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u044A"
+      <ShiftLetter>k__BackingField: "\u042A"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 13
+    <Info>k__BackingField:
+      <Letter>k__BackingField: ENTER
+      <ShiftLetter>k__BackingField: 
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 301
+    <Info>k__BackingField:
+      <Letter>k__BackingField: CAPS
+      <ShiftLetter>k__BackingField: 
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 97
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0444"
+      <ShiftLetter>k__BackingField: "\u0424"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 115
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u044B"
+      <ShiftLetter>k__BackingField: "\u042B"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 100
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0432"
+      <ShiftLetter>k__BackingField: "\u0412"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 102
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0430"
+      <ShiftLetter>k__BackingField: "\u0410"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 103
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u043F"
+      <ShiftLetter>k__BackingField: "\u041F"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 104
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0440"
+      <ShiftLetter>k__BackingField: "\u0420"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 106
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u043E"
+      <ShiftLetter>k__BackingField: "\u041E"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 107
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u043B"
+      <ShiftLetter>k__BackingField: "\u041B"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 108
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0434"
+      <ShiftLetter>k__BackingField: "\u0414"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 59
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0436"
+      <ShiftLetter>k__BackingField: "\u0416"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 39
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u044D"
+      <ShiftLetter>k__BackingField: "\u042D"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 92
+    <Info>k__BackingField:
+      <Letter>k__BackingField: \
+      <ShiftLetter>k__BackingField: 
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 304
+    <Info>k__BackingField:
+      <Letter>k__BackingField: SHIFT
+      <ShiftLetter>k__BackingField: 
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 122
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u044F"
+      <ShiftLetter>k__BackingField: "\u042F"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 120
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0447"
+      <ShiftLetter>k__BackingField: "\u0427"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 99
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0441"
+      <ShiftLetter>k__BackingField: "\u0421"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 118
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u043C"
+      <ShiftLetter>k__BackingField: "\u041C"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 98
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0438"
+      <ShiftLetter>k__BackingField: "\u0418"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 110
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0442"
+      <ShiftLetter>k__BackingField: "\u0422"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 109
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u044C"
+      <ShiftLetter>k__BackingField: "\u042C"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 44
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u0431"
+      <ShiftLetter>k__BackingField: "\u0411"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 46
+    <Info>k__BackingField:
+      <Letter>k__BackingField: "\u044E"
+      <ShiftLetter>k__BackingField: "\u042E"
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 47
+    <Info>k__BackingField:
+      <Letter>k__BackingField: .
+      <ShiftLetter>k__BackingField: ','
+      <IsDouble>k__BackingField: 1
+  - <Key>k__BackingField: 303
+    <Info>k__BackingField:
+      <Letter>k__BackingField: SHIFT
+      <ShiftLetter>k__BackingField: 
+      <IsDouble>k__BackingField: 0
+  - <Key>k__BackingField: 32
+    <Info>k__BackingField:
+      <Letter>k__BackingField: ' '
+      <ShiftLetter>k__BackingField: 
+      <IsDouble>k__BackingField: 0

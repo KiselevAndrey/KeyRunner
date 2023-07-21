@@ -6,7 +6,7 @@ using UnityEngine;
 namespace CodeBase
 {
     public class MainView : MonoBehaviour
-    {//
+    {
         [SerializeField] private MainMediator _mediator;
         [SerializeField] private GameService _game;
         [SerializeField] private MenuForm _menu;
