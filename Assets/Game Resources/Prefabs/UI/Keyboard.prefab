@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5529191ee9b232244a1cc266bd459406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keyMapSO: {fileID: 11400000, guid: 44f192e7e2ab7b943b9667fbc97c1136, type: 2}
+  _defaultKeyMapSO: {fileID: 11400000, guid: 44f192e7e2ab7b943b9667fbc97c1136, type: 2}
 --- !u!114 &2598853300151483751
 MonoBehaviour:
   m_ObjectHideFlags: 0

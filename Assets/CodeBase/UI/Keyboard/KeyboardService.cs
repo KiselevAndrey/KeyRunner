@@ -9,7 +9,7 @@ namespace CodeBase.UI.Keyboard
 {
     public class KeyboardService : MonoBehaviour
     {
-        [SerializeField] private LanguageKeyMapSO _keyMapSO;
+        [SerializeField] private LanguageKeyMapSO _defaultKeyMapSO;
 
         private int _shiftPressed;
 
@@ -62,6 +62,9 @@ namespace CodeBase.UI.Keyboard
         private void Awake()
         {
             _displays = GetComponentsInChildren<KeyDisplay>().ToList();
+
+            if (_defaultKeyMapSO != null)
+                InitDisplays(_defaultKeyMapSO);
         }
 
         private void Update()

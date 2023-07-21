@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameplayForm: {fileID: 8580863837781024849, guid: e2c797bb2d4a6bd42820fc493b286d76, type: 3}
+  _gameplayService: {fileID: 1114755054498846337, guid: e0a2889b1f2ee324ab91a071e7095edb, type: 3}
 --- !u!1 &607261318
 GameObject:
   m_ObjectHideFlags: 0
